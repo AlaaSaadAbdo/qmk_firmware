@@ -62,5 +62,5 @@
 #define DRV_GREETING  alert_750ms
 
 #define RGB_DI_PIN GP27
-#define DRIVER_LED_TOTAL 34
-#define RGB_MATRIX_LED_COUNT 34
+#define DRIVER_LED_TOTAL 43
+#define RGB_MATRIX_LED_COUNT 43
