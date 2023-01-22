@@ -52,7 +52,8 @@ bool mab_process_record_haptic(uint16_t keycode, keyrecord_t *record) {
             break;
         case KC_ESC:
             if (record->event.pressed) {
-                DRV_pulse(sharp_tick1);
+                /* DRV_pulse(sharp_tick1); */
+                DRV_pulse(medium_click1);
             }
             break;
         case KC_BTN2:
