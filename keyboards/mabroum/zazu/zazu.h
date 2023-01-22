@@ -1,5 +1,4 @@
 #pragma once
-
 #include "quantum.h"
 
 typedef struct kb_runtime_config {
