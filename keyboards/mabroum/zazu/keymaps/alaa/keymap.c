@@ -67,28 +67,28 @@ enum layers {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [HDN] = LAYOUT_2_3x5_3(
-        KC_W, KC_9,   KC_F,   KC_M,   KC_P,   KC_B,                   KC_COMMA, KC_X,   KC_QUOTE, KC_J, KC_9,  KC_K,
-        KC_R, KC_2,   KC_S,   KC_N,   KC_T,   KC_G,                   KC_DOT,   KC_A,   KC_E,     KC_I, KC_2,  KC_H,
-              KC_6,   KC_C,   KC_L,   KC_D,   KC_0,                   KC_0,     KC_U,   KC_O,     KC_Y, KC_6,
+        KC_W, KC_W,  KC_F,   KC_M,   KC_P,   KC_B,                   KC_SLSH, KC_X,   KC_QUOTE, KC_J, KC_K,   KC_K,
+        KC_R, KC_R,  KC_S,   KC_N,   KC_T,   KC_G,                   KC_COMMA,   KC_A,   KC_E,     KC_I, KC_H,   KC_H,
+              KC_Z,  KC_C,   KC_L,   KC_D,   KC_V,                   KC_DOT,  KC_U,   KC_O,     KC_Y, KC_J,
                                 MO_NAV, KC_SPACE,  KC_DOT, KC_COMMA,  OSM(MOD_LSFT), MO_SYM,
-                                        KC_BTN1, KC_BTN2, KC_BTN3,
+                                        KC_BTN3, KC_BTN1, KC_BTN2,
                                      // click  ,  right           , down    , left          , up
                                      ACCEL_TOG , KC_AUDIO_VOL_DOWN, SNP_TOG, KC_AUDIO_VOL_UP, DRG_TOG
 
     ),
 
     [NAV] = LAYOUT_2_3x5_3(
-        SCRNSHT, KC_9,  KC_ENT,  KC_BSPC,  KC_TAB,  KC_DEL,            DWRD,    KC_NO,     KC_UP,    QUIT,     KC_9,  WRKFLW1,
-        OS_LCTL, KC_2,  OS_LALT, OS_LGUI,  OS_LSFT, SALL,              KC_DOT,  KC_LEFT,   KC_DOWN,  KC_RIGHT, KC_2,  WRKFLW2,
-                 KC_6,  CUT,     CPY,      PST,     KC_0,              KC_0,    KC_ENT,    KC_BSPC,  KC_TAB,   KC_6,
+        SCRNSHT, SCRNSHT,  KC_ENT,  KC_BSPC,  KC_TAB,  KC_DEL,            DWRD,    KC_NO,     KC_UP,    QUIT,     WRKFLW1,  WRKFLW1,
+        OS_LCTL, OS_LCTL,  OS_LALT, OS_LGUI,  OS_LSFT, SALL,              KC_DOT,  KC_LEFT,   KC_DOWN,  KC_RIGHT, WRKFLW2,  WRKFLW2,
+                 KC_6,  CUT,     CPY,      PST,        SALL,              KC_0,    KC_ENT,    KC_BSPC,  KC_TAB,   KC_6,
                                    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                           KC_TRNS, KC_TRNS, KC_TRNS,
                                          // click  ,  right , down      , left   , up
                                             KC_TRNS, KC_TRNS, DPI_RMOD, KC_TRNS, DPI_MOD
     ),
     [SYM] = LAYOUT_2_3x5_3(
-        KC_TILDE, KC_9,   KC_9,   KC_8,   KC_7,   KC_EQUAL,           KC_COMMA, KC_SCLN, KC_COLN, KC_BSLS,  KC_9, KC_GRAVE,
-        KC_3,     KC_2,   KC_2,   KC_1,   KC_0,   KC_MINUS,           KC_DOT,   OS_LSFT, OS_LGUI,  OS_RALT, KC_2, OS_LCTL,
+        KC_TILDE, KC_9,   KC_9,   KC_8,   KC_7,   KC_EQUAL,           KC_COMMA, KC_SCLN, KC_COLN, KC_BSLS,  KC_GRAVE, KC_GRAVE,
+        KC_2,     KC_3,   KC_2,   KC_1,   KC_0,   KC_MINUS,           KC_DOT,   OS_LSFT, OS_LGUI,  OS_RALT, OS_RALT, OS_LCTL,
                   KC_6,   KC_6,   KC_5,   KC_4,   KC_0,               KC_0,     KC_QUES, KC_EXLM, KC_SLSH,  KC_6,
                                  KC_TRNS,       KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                             RGB_HUD, RGB_SAI, RGB_SAD,
@@ -96,9 +96,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             RGB_TOG, RGB_VAI, RGB_RMOD, RGB_VAD, RGB_MOD
     ),
     [HDNW] = LAYOUT_2_3x5_3(
-        KC_W, KC_9,  KC_F,   KC_M,   KC_P,   KC_B,                   KC_COMMA, KC_X,   KC_QUOTE, KC_J, KC_9,   KC_K,
-        KC_R, KC_2,  KC_S,   KC_N,   KC_T,   KC_G,                   KC_DOT,   KC_A,   KC_E,     KC_I, KC_2,   KC_H,
-              KC_6,  KC_C,   KC_L,   KC_D,   KC_0,                   KC_0,     KC_U,   KC_O,     KC_Y, KC_6,
+        KC_W, KC_W,  KC_F,   KC_M,   KC_P,   KC_B,                   KC_SLSH, KC_X,   KC_QUOTE, KC_J, KC_K,   KC_K,
+        KC_R, KC_R,  KC_S,   KC_N,   KC_T,   KC_G,                   KC_COMMA,   KC_A,   KC_E,     KC_I, KC_H,   KC_H,
+              KC_Z,  KC_C,   KC_L,   KC_D,   KC_V,                   KC_DOT,  KC_U,   KC_O,     KC_Y, KC_J,
                                         MO_NAVW, KC_SPACE, KC_COMMA, KC_DOT,  OSM(MOD_LSFT), MO_SYMW,
                                         KC_TRNS, KC_TRNS, KC_TRNS,
                                      // click  ,  right           , down    , left          , up
@@ -106,9 +106,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [NAVW] = LAYOUT_2_3x5_3(
-        SCRNSHT, KC_9,  KC_ENT, KC_BSPC, KC_TAB,  KC_DEL,            DWRD,    KC_F2,     KC_UP,    QUITW,    KC_9,   DPI_MOD,
-        OS_LGUI, KC_2,  OS_LALT, OS_LCTL, OS_LSFT, SALLW,            SALLW,   KC_LEFT,   KC_DOWN,  KC_RIGHT, KC_2,   RCRD,
-                 KC_6,  CUTW,   CPYW,    PSTW,    KC_0,              KC_0,         KC_ENT,    KC_BSPC,  KC_TAB,   KC_6,
+        SCRNSHT, SCRNSHT,  KC_ENT, KC_BSPC, KC_TAB,  KC_DEL,            DWRD,    KC_F2,     KC_UP,    QUITW,    DPI_MOD,   DPI_MOD,
+        OS_LGUI, OS_LGUI,  OS_LALT, OS_LCTL, OS_LSFT, SALLW,            SALLW,   KC_LEFT,   KC_DOWN,  KC_RIGHT, RCRD,   RCRD,
+                 KC_6,     CUTW,   CPYW,    PSTW,    SALLW,              KC_0,         KC_ENT,    KC_BSPC,  KC_TAB,   KC_6,
                                           KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,
                                           KC_TRNS, KC_TRNS, KC_TRNS,
                                          // click  ,  right , down      , left   , up
@@ -116,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [SYMW] = LAYOUT_2_3x5_3(
         KC_TILDE, KC_9,  KC_9,   KC_8,   KC_7,   KC_EQUAL,           KC_COMMA, KC_SCLN, KC_COLN, KC_BSLS, KC_9, KC_GRAVE,
-        KC_3,     KC_2,  KC_2,   KC_1,   KC_0,   KC_MINUS,           KC_DOT,   OS_LSFT, OS_LCTL, OS_RALT, KC_2, OS_LGUI,
+        KC_3,     KC_3,  KC_2,   KC_1,   KC_0,   KC_MINUS,           KC_DOT,   OS_LSFT, OS_LCTL, OS_RALT, KC_2, OS_LGUI,
                   KC_6,  KC_6,   KC_5,   KC_4,   KC_0,               KC_0,     KC_QUES, KC_EXLM, KC_SLSH, KC_6,
                                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,
                                             RGB_HUD, RGB_SAI, RGB_SAD,
