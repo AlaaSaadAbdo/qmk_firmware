@@ -74,7 +74,8 @@ enum layers {
 #define DWRDW        C(KC_BSPC)
 #define QUITW        A(KC_F4)
 #define SAVEW        C(KC_S)
-
+#define RAYCAST     C(A(KC_SPACE))
+#define RAYCLIP     C(A(G(S(KC_J))))
 
 #include "g/keymap_combo.h"
 

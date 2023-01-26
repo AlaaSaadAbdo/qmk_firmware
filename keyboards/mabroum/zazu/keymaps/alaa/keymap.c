@@ -61,6 +61,8 @@ enum layers {
 #define REDOWIN     C(KC_Y)
 #define CLIPBOARD   G(C(A(S(KC_Z))))
 #define LAUNCHER    G(KC_SPACE)
+#define RAYCAST     C(A(KC_SPACE))
+#define RAYCLIP     C(A(G(S(KC_J))))
 #define OSM_SHFT    OSM(MOD_LSFT)
 
 #include "g/keymap_combo.h"
