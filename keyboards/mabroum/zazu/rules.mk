@@ -28,6 +28,10 @@ COMBO_ENABLE = yes
 ENCODER_MAP_ENABLE = yes
 CAPS_WORD_ENABLE = yes
 
+ifeq ($(strip $(MCU_HELIOS)), yes)
+   OPT_DEFS += -DMCU_HELIOS
+endif
+
 SRC += nshot_mod.c \
        repeat.c \
        swapper.c

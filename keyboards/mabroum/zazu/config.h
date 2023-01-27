@@ -62,6 +62,11 @@
 #define F_LRA 150 // resonance freq
 #define DRV_GREETING  alert_750ms
 
-#define RGB_DI_PIN GP27
+#ifdef MCU_HELIOS
+  #define RGB_DI_PIN GP25
+#else
+  #define RGB_DI_PIN GP27
+#endif
+
 #define DRIVER_LED_TOTAL 43
 #define RGB_MATRIX_LED_COUNT 43
