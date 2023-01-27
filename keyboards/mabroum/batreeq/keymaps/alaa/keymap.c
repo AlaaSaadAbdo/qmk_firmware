@@ -70,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_R,   KC_S,   KC_N,   KC_T,   KC_G,                   KC_DOT,   KC_A,   KC_E,     KC_I,   KC_H,
                 KC_C,   KC_L,   KC_D,                                     KC_U,   KC_O,     KC_Y,
                                         MO_NAV, KC_SPACE,       OSM(MOD_LSFT), MO_SYM,
-                                        SNIPING, KC_BTN1, KC_BTN2, KC_BTN3
+                                        SNIPING, KC_BTN3, KC_BTN1, KC_BTN2
     ),
 
     [NAV] = LAYOUT_23332(
