@@ -2,6 +2,8 @@
 #include "zazu.h"
 #include "display.h"
 
+#ifdef RGB_MATRIX_ENABLE
+
 led_config_t g_led_config = { {
     {     40,     39,     38,     37,      5,      4,      3,      2 },
     {     33,     34,     35,     36,      6,      7,      8,      9 },
@@ -28,6 +30,8 @@ led_config_t g_led_config = { {
     4, 4, 4, 4, 4, 4,
        4, 4, 4, 4, 4,
 } };
+
+#endif /* ifndef RGB_MATRIX_ENABLE */
 
 #include "qp.h"
 #include "qp_lvgl.h"
