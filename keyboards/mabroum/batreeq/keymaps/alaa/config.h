@@ -1,4 +1,4 @@
 #define COMBO_ONLY_FROM_LAYER 0
-#define COMBO_TERM 35
+#define COMBO_TERM 20
 
 #define MOUSE_EXTENDED_REPORT
