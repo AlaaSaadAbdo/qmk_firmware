@@ -2,14 +2,12 @@
 #include "keyboards/mabroum/keys.h"
 #include "keycodes.h"
 
-#define modbit_lclg (MOD_BIT(KC_LCTL) | MOD_BIT(KC_LGUI))
-
 nshot_state_t  nshot_states[] = {
-    {OS_LSFT, MOD_BIT(KC_LSFT), 1, true,  os_up_unqueued, 0, false},
-    {OS_LCTL, MOD_BIT(KC_LCTL), 1, true,  os_up_unqueued, 0, false},
-    {OS_LALT, MOD_BIT(KC_LALT), 1, true,  os_up_unqueued, 0, false},
-    {OS_RALT, MOD_BIT(KC_RALT), 1, true,  os_up_unqueued, 0, false},
-    {OS_LGUI, MOD_BIT(KC_LGUI), 1, true,  os_up_unqueued, 0, false}
+    {OS_LSFT, MOD_BIT(KC_LSFT), MOD_BIT(KC_LSFT), 1, true,  os_up_unqueued, 0, false},
+    {OS_LCTL, MOD_BIT(KC_LCTL), MOD_BIT(KC_LGUI), 1, true,  os_up_unqueued, 0, false},
+    {OS_LALT, MOD_BIT(KC_LALT), MOD_BIT(KC_LALT), 1, true,  os_up_unqueued, 0, false},
+    {OS_RALT, MOD_BIT(KC_RALT), MOD_BIT(KC_RALT), 1, true,  os_up_unqueued, 0, false},
+    {OS_LGUI, MOD_BIT(KC_LGUI), MOD_BIT(KC_LCTL), 1, true,  os_up_unqueued, 0, false}
 };
 
 uint8_t NUM_NSHOT_STATES = sizeof(nshot_states) / sizeof(nshot_state_t);
@@ -20,12 +18,13 @@ void process_nshot_state(uint16_t keycode, keyrecord_t *record) {
     for (int i = 0; i < NUM_NSHOT_STATES; ++i) {
         curr_state = &nshot_states[i];
         uint8_t max_count = curr_state->max_count * 2;
+        uint8_t current_modbit = keymap_config.swap_lctl_lgui ? curr_state->modbit : curr_state->modbit_mac;
 
         if (keycode == curr_state->trigger) {
             if (record->event.pressed) {
                 // Trigger keydown
                 if (curr_state->state == os_up_unqueued) {
-                    register_mods(curr_state->modbit);
+                    register_mods(current_modbit);
                 }
                 curr_state->state = os_down_unused;
                 curr_state->count = 0;
@@ -41,12 +40,12 @@ void process_nshot_state(uint16_t keycode, keyrecord_t *record) {
                         break;
                         }
                         curr_state->state = os_up_unqueued;
-                            unregister_mods(curr_state->modbit);
+                            unregister_mods(current_modbit);
                             break;
                     case os_down_used:
                         // If we did use the mod while trigger was held, unregister it.
                         curr_state->state = os_up_unqueued;
-                        unregister_mods(curr_state->modbit);
+                        unregister_mods(current_modbit);
                         break;
                     default:
                         break;
@@ -59,7 +58,7 @@ void process_nshot_state(uint16_t keycode, keyrecord_t *record) {
                     curr_state->state = os_up_unqueued;
                     curr_state->count = 0;
                     curr_state->had_keydown = curr_state->active_on_rolls;
-                    unregister_mods(curr_state->modbit);
+                    unregister_mods(current_modbit);
                 }
 
                 // Check for oneshot completion on sequential keys while rolling.
@@ -75,7 +74,7 @@ void process_nshot_state(uint16_t keycode, keyrecord_t *record) {
                         curr_state->state = os_up_unqueued;
                         curr_state->count = 0;
                         curr_state->had_keydown = curr_state->active_on_rolls;
-                        unregister_mods(curr_state->modbit);
+                        unregister_mods(current_modbit);
                     }
                 }
 
@@ -106,7 +105,7 @@ void process_nshot_state(uint16_t keycode, keyrecord_t *record) {
                                 curr_state->state = os_up_unqueued;
                                 curr_state->count = 0;
                                 curr_state->had_keydown = curr_state->active_on_rolls;
-                                unregister_mods(curr_state->modbit);
+                                unregister_mods(current_modbit);
                             }
                             break;
                         default:

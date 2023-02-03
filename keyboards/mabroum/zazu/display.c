@@ -80,17 +80,16 @@ void ui_active_layer_change(lv_event_t * e) {
     if(event_code == USER_EVENT_ACTIVE_LAYER_CHANGE) {
         switch (get_highest_layer(layer_state | default_layer_state)) {
             case 0:
-                lv_img_set_src(ui_Layer_Indicator, &apple);
-                break;
-            case 3:
-                lv_img_set_src(ui_Layer_Indicator, &window);
+                if (keymap_config.swap_lctl_lgui) {
+                  lv_img_set_src(ui_Layer_Indicator, &apple);
+                } else {
+                  lv_img_set_src(ui_Layer_Indicator, &window);
+                }
                 break;
             case 1:
-            case 4:
                 lv_img_set_src(ui_Layer_Indicator, &tools);
                 break;
             case 2:
-            case 5:
                 lv_img_set_src(ui_Layer_Indicator, &hash);
                  break;
         }

@@ -230,11 +230,12 @@ bool mab_process_pointing_keys(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-void mab_set_pointer_mac() {
+void mab_set_pointer() {
+  if (keymap_config.swap_lctl_lgui) {
     g_mab_config.pointer_default_dpi  = 2;
     maybe_update_pointing_device_cpi(&g_mab_config);
-}
-void mab_set_pointer_win() {
+  } else {
     g_mab_config.pointer_default_dpi  = 1;
     maybe_update_pointing_device_cpi(&g_mab_config);
+  }
 }

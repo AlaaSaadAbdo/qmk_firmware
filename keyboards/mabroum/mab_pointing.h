@@ -17,5 +17,4 @@ void mab_set_pointer_acceleration_enabled(bool enable);
 
 bool mab_process_pointing_keys(uint16_t keycode, keyrecord_t *record);
 
-void mab_set_pointer_mac(void);
-void mab_set_pointer_win(void);
+void mab_set_pointer(void);

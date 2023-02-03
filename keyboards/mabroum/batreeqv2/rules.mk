@@ -27,6 +27,7 @@ QUANTUM_PAINTER_LVGL_INTEGRATION = yes
 COMBO_ENABLE = yes
 ENCODER_MAP_ENABLE = yes
 CAPS_WORD_ENABLE = yes
+MAGIC_ENABLE = yes
 
 SRC += nshot_mod.c \
        repeat.c \
