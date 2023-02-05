@@ -9,6 +9,7 @@
 
 enum layers {
     HDN = 0,
+    APT,
     NAV,
     SYM,
 };
@@ -29,8 +30,8 @@ enum layers {
 #define RCRD        A(KC_F10)
 
 // layers
-#define MO_NAV MO(1)
-#define MO_SYM MO(2)
+#define MO_NAV MO(2)
+#define MO_SYM MO(3)
 
 // mac
 #define PSTM      G(KC_V)
@@ -73,7 +74,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                      ACCEL_TOG , KC_AUDIO_VOL_DOWN, SNP_TOG, KC_AUDIO_VOL_UP, DRG_TOG
 
     ),
+    [APT] = LAYOUT_2333245(
+        KC_W,   KC_F,   KC_Y,   KC_P,   KC_B,                   KC_J,   KC_X,   KC_QUOTE, KC_COMMA, KC_DOT,
+        KC_R,   KC_S,   KC_T,   KC_H,   KC_K,                   KC_M,   KC_N,   KC_E,     KC_I,     KC_A,
+                KC_C,   KC_G,   KC_D,                                   KC_L,   KC_O,     KC_U,
+                                        MO_NAV, KC_SPACE,       OSM(MOD_LSFT), MO_SYM,
+                                        SNIPING, KC_BTN3, KC_BTN1, KC_BTN2,
+                                     // click  ,  right           , down    , left          , up
+                                     ACCEL_TOG , KC_AUDIO_VOL_DOWN, SNP_TOG, KC_AUDIO_VOL_UP, DRG_TOG
 
+    ),
     [NAV] = LAYOUT_2333245(
         SCRNSHT,   KC_ENT, KC_BSPC, KC_TAB,  KC_DEL,            DWRD,    KC_NO,     KC_UP,    QUIT,       WRKFLW1,
         OS_LCTL,   OS_LALT, OS_LGUI,  OS_LSFT, SALL,            KC_DOT,  KC_LEFT,   KC_DOWN,  KC_RIGHT,   WRKFLW2,

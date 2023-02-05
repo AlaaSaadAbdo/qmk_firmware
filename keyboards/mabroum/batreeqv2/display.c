@@ -11,6 +11,7 @@ lv_obj_t * ui_Screen1_Label_CPI;
 lv_obj_t * ui_Screen1_deflayer;
 lv_obj_t * ui_Screen1_Label_ACC;
 lv_obj_t * ui_Screen1_Label_RGB;
+lv_obj_t * ui_Screen1_layout;
 lv_obj_t * ui_Screen1_Label_ALTMOD;
 lv_obj_t * ui_Screen1_Label_CMDMOD;
 lv_obj_t * ui_Screen1_Label_SHIFTMOD;
@@ -78,33 +79,33 @@ void sniping_set_user(bool active) {
 void ui_active_layer_change(lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
     if(event_code == USER_EVENT_ACTIVE_LAYER_CHANGE) {
-        switch (get_highest_layer(layer_state | default_layer_state)) {
-            case 0:
+        switch (get_highest_layer(layer_state)) {
+            case 2:
+                lv_img_set_src(ui_Layer_Indicator, &tools);
+                break;
+            case 3:
+                lv_img_set_src(ui_Layer_Indicator, &hash);
+                 break;
+            default:
                 if (keymap_config.swap_lctl_lgui) {
                   lv_img_set_src(ui_Layer_Indicator, &apple);
                 } else {
                   lv_img_set_src(ui_Layer_Indicator, &window);
                 }
                 break;
-            case 1:
-                lv_img_set_src(ui_Layer_Indicator, &tools);
-                break;
-            case 2:
-                lv_img_set_src(ui_Layer_Indicator, &hash);
-                 break;
         }
   }
 }
 
-void qmk_lv_set_layer(uint8_t layer) {
-    layer_move(layer);
-}
+/* void qmk_lv_set_layer(uint8_t layer) { */
+/*     layer_move(layer); */
+/* } */
 
-uint8_t qmk_lv_active_layer(void) {
-    uint8_t active_layer = 0;
-    active_layer = get_highest_layer(layer_state);
-    return active_layer;
-}
+/* uint8_t qmk_lv_active_layer(void) { */
+/*     uint8_t active_layer = 0; */
+/*     active_layer = get_highest_layer(layer_state); */
+/*     return active_layer; */
+/* } */
 
 void set_cpi_text_value(lv_obj_t* lbl) {
     if (lv_obj_is_valid(lbl)) {
@@ -265,6 +266,22 @@ void ui_render_acc(lv_event_t * e) {
     }
 }
 
+void ui_render_layout(lv_event_t * e) {
+  lv_event_code_t event_code = lv_event_get_code(e);
+  if(event_code == USER_EVENT_LAYOUT_UPDATE) {
+    char buf[11];
+    switch (get_highest_layer(default_layer_state)) {
+        case 0:
+            snprintf(buf, sizeof(buf), "HDN");
+            break;
+        case 1:
+            snprintf(buf, sizeof(buf), "APT");
+             break;
+    }
+  lv_label_set_text(ui_Screen1_layout, buf);
+  }
+}
+
 uint16_t qmk_lv_get_cpi(void) {
     uint16_t cpi = 0;
     cpi = mab_get_pointer_sniping_enabled() ? mab_get_pointer_sniping_dpi() : mab_get_pointer_default_dpi();
@@ -299,7 +316,17 @@ void lvgl_event_triggers(void) {
         lv_event_send(ui_Screen1_Label_ACC, USER_EVENT_ACC_UPDATE, NULL);
     }
 
+    static uint32_t last_dl_state   = 0;
+    bool dl_state_redraw = false;
+    if (last_dl_state != default_layer_state) {
+        last_dl_state   = default_layer_state;
+        dl_state_redraw = true;
+    }
+    if (dl_state_redraw) {
+        lv_event_send(ui_Screen1_layout, USER_EVENT_LAYOUT_UPDATE, NULL);
+    }
     bool layer_state_redraw = false;
+
     static uint32_t last_layer_state   = 0;
     if (last_layer_state != layer_state) {
         last_layer_state   = layer_state;
@@ -378,7 +405,7 @@ void display_init(void) {
     lv_obj_set_width(ui_Layer_Indicator, LV_SIZE_CONTENT);   /// 81
     lv_obj_set_height(ui_Layer_Indicator, LV_SIZE_CONTENT);    /// 55
     lv_obj_set_x(ui_Layer_Indicator, 25);
-    lv_obj_set_y(ui_Layer_Indicator, -10);
+    lv_obj_set_y(ui_Layer_Indicator, -25);
     lv_obj_set_align(ui_Layer_Indicator, LV_ALIGN_LEFT_MID);
     lv_obj_add_flag(ui_Layer_Indicator, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
     lv_obj_clear_flag(ui_Layer_Indicator, LV_OBJ_FLAG_SCROLLABLE);
@@ -409,6 +436,14 @@ void display_init(void) {
     lv_obj_set_y(ui_Screen1_Label_RGB, 105);
     lv_label_set_text(ui_Screen1_Label_RGB, "RGB");
     lv_obj_add_event_cb(ui_Screen1_Label_RGB, ui_render_rgbmode, USER_EVENT_RGBMODE_UPDATE, NULL);
+
+    ui_Screen1_layout = lv_label_create(ui_Screen1);
+    lv_obj_set_width(ui_Screen1_layout , 100);
+    lv_obj_set_style_text_font(ui_Screen1_layout, &rb_24, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_x(ui_Screen1_layout, 40);
+    lv_obj_set_y(ui_Screen1_layout, 95);
+    lv_obj_add_event_cb(ui_Screen1_layout, ui_render_layout, USER_EVENT_LAYOUT_UPDATE, NULL);
+    lv_event_send(ui_Screen1_layout, USER_EVENT_LAYOUT_UPDATE, NULL);
 
     ui_Screen1_Label_ALTMOD = lv_img_create(ui_Screen1);
     lv_obj_set_width(ui_Screen1_Label_ALTMOD, LV_SIZE_CONTENT);   /// 81

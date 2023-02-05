@@ -41,6 +41,8 @@ bool mab_process_record_haptic(uint16_t keycode, keyrecord_t *record) {
                 DRV_pulse(medium_click1);
             }
             break;
+        case DF(0):
+        case DF(1):
         case SW_CG:
         case CG_TOGG:
         case POINTER_DEFAULT_DPI_FORWARD:
