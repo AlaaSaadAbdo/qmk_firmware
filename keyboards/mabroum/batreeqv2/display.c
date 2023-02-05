@@ -1,6 +1,7 @@
 #include "display.h"
 #include "quantum.h"
 #include "keyboards/mabroum/mab_pointing.h"
+#include "layers.h"
 #include <ctype.h>
 
 lv_obj_t * mbox1;
@@ -80,10 +81,10 @@ void ui_active_layer_change(lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
     if(event_code == USER_EVENT_ACTIVE_LAYER_CHANGE) {
         switch (get_highest_layer(layer_state)) {
-            case 2:
+            case NAV:
                 lv_img_set_src(ui_Layer_Indicator, &tools);
                 break;
-            case 3:
+            case SYM:
                 lv_img_set_src(ui_Layer_Indicator, &hash);
                  break;
             default:
@@ -271,10 +272,10 @@ void ui_render_layout(lv_event_t * e) {
   if(event_code == USER_EVENT_LAYOUT_UPDATE) {
     char buf[11];
     switch (get_highest_layer(default_layer_state)) {
-        case 0:
+        case HDN:
             snprintf(buf, sizeof(buf), "HDN");
             break;
-        case 1:
+        case APT:
             snprintf(buf, sizeof(buf), "APT");
              break;
     }

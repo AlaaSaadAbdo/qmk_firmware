@@ -6,13 +6,7 @@
 #include "keyboards/mabroum/keys.h"
 #include "lvgl.h"
 #include "display.h"
-
-enum layers {
-    HDN = 0,
-    APT,
-    NAV,
-    SYM,
-};
+#include "layers.h"
 
 // pointing
 #define DPI_MOD POINTER_DEFAULT_DPI_FORWARD
@@ -30,8 +24,8 @@ enum layers {
 #define RCRD        A(KC_F10)
 
 // layers
-#define MO_NAV MO(2)
-#define MO_SYM MO(3)
+#define MO_NAV MO(NAV)
+#define MO_SYM MO(SYM)
 
 // mac
 #define PSTM      G(KC_V)
