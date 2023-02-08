@@ -9,6 +9,7 @@ enum keycodes {
     SNIPING_MODE_TOGGLE,
     DRAGSCROLL_MODE,
     DRAGSCROLL_MODE_TOGGLE,
+    ML_TOG,
 };
 
 #include "g/keymap_combo.h"
@@ -105,10 +106,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
     ),
     [MOUS] = LAYOUT_ortho_23332x2(
-        KC_TILDE,   KC_9,   KC_8,    KC_7,    KC_MS_WH_UP,                KC_COMMA, KC_SCLN, KC_COLN, KC_BSLS,  KC_GRAVE,
-        OS_CMD,     OS_ALT, OS_CTRL, OS_SHFT, KC_MS_WH_DOWN,              SALLW,    KC_LEFT, KC_DOWN, KC_RIGHT, WRKFLW2,
-                    SNIPING,   KC_5,   DRGSCRL,   KC_NO,                        KC_NO,    KC_QUES, KC_EXLM, KC_SLSH,
-                                            KC_BTN2, KC_BTN1, KC_TRNS, KC_TRNS
+        SNIPING,  ML_TOG,    ML_TOG,  ML_TOG,    SNIPING,                ML_TOG, ML_TOG, ML_TOG, ML_TOG, ML_TOG,
+        OS_CMD,   OS_ALT,    OS_CTRL, OS_SHFT,   DRGSCRL,                ML_TOG, ML_TOG, ML_TOG, ML_TOG, ML_TOG,
+                  KC_BTN3,   KC_BTN2, KC_BTN1,   KC_NO,                  KC_NO,  ML_TOG, ML_TOG, ML_TOG,
+                                                ML_TOG, ML_TOG,     ML_TOG, ML_TOG
     )
 
 };
@@ -280,6 +281,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case DRAGSCROLL_MODE_TOGGLE:
             if (record->event.pressed) {
                 asfoora_set_pointer_dragscroll_enabled(!asfoora_get_pointer_dragscroll_enabled());
+            }
+            break;
+        case ML_TOG:
+            if (record->event.pressed) {
+                layer_off(HDNW);
+                return true;
             }
             break;
     }
