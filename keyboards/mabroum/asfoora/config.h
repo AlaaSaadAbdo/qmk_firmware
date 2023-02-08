@@ -23,6 +23,8 @@
 #define I2C1_DUTY_CYCLE FAST_DUTY_CYCLE_2
 #define I2C1_CLOCK_SPEED  400000
 #define POINTING_DEVICE_AUTO_MOUSE_ENABLE
+#define AUTO_MOUSE_TIME 1500
+#define AUTO_MOUSE_DELAY 1000
 #define NO_ACTION_ONESHOT
 
 #define ONESHOT_TAP_TOGGLE 5  /* Tapping this number of times holds the key until tapped once again. */
