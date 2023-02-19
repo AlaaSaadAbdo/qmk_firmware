@@ -405,7 +405,9 @@ Recall that the mouse report is set to zero (except the buttons) whenever it is 
 
 ### Drag Scroll or Mouse Scroll
 
-A very common implementation is to use the mouse movement to scroll instead of moving the cursor on the system.  This uses the `pointing_device_task_user` callback to intercept and modify the mouse report before it's sent to the host system. 
+A very common implementation is to use the mouse movement to scroll instead of moving the cursor on the system.  This uses the `pointing_device_task_user` callback to intercept and modify the mouse report before it's sent to the host system.
+
+!> Note that the pointing device modes feature implements this along with other popular pointing device features automatically
 
 ```c
 enum custom_keycodes {
@@ -735,7 +737,7 @@ In general the following two functions must be implemented in appropriate locati
 
 ---
 
-# Pointing Device Modes :id=pointing_device_modes
+# Pointing Device Modes :id=pointing-device-modes
 
 Inspired by the work of previous trackball users that added features such as drag scroll, caret scroll, and sniping modes to their keyboards, this framework allows for easy setup and inclusion of different pointing device modes that when active will change the behaviour of a pointing device by taking it's x/y outputs and changing them into something else such as h/v for drag scrolling, key presses such as arrow keys for caret scrolling, and even just adjusting the x/y values before output.  When a pointing device mode is active it accumulates x and y outputs from a pointing device and stores it into internal x & y values, halting normal mouse x and y output (_modes can re-enable and/or modify mouse output_), these internally stored x and y values are then divided by a defined divisor resulting the modified output (_key taps, h/v, modified mouse x/y etc._). The dividing factors can be used to control sensitivity in each mode as adjusting cpi may not always be desired/possible.   
 

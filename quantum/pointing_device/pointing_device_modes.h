@@ -151,7 +151,7 @@ report_mouse_t pointing_device_modes_task(report_mouse_t mouse_report);         
 bool           process_pointing_mode_records(uint16_t keyrecord, keyrecord_t* record); // handle processing of built in keyrecords (in process_record stack)
 
 /* ----------Pointing Device mode Mapping------------------------------------------------------------------------- */
-#if (!defined(POINTING_MODE_MAP_COUNT) || POINTING_MODE_MAP_COUNT <= 0)
+#ifndef POINTING_MODE_MAP_COUNT
 #    define POINTING_MODE_MAP_COUNT 0
 #else
 #    define POINTING_MODE_LAYOUT(Y_POS, X_NEG, X_POS, Y_NEG) \

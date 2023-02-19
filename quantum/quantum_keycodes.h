@@ -240,15 +240,15 @@ enum pointing_device_mode_list {
 #else
     PM_SAFE_RANGE,
 #endif
-    // safe range for custom modes requiring custom activation/new keycodes
-    PM_SAFE_RANGE_ADV = QK_POINTING_MODE_MAX - QK_POINTING_MODE + 1
+    // range for custom modes requiring custom activation/new keycodes
+    PM_ADVANCED_RANGE_START = QK_POINTING_MODE_MAX - QK_POINTING_MODE + 1
 };
 
 // pointing mode aliases
 #define PM_PRE PM_PRECISION
+#define PM_DRG PM_DRAG
+#define PM_CRT PM_CARET
 #define PM_HST PM_HISTORY
 #define PM_VOL PM_VOLUME
-#define PM_CRT PM_CARET
-#define PM_DRG PM_DRAG
 
 #include "quantum_keycodes_legacy.h"
