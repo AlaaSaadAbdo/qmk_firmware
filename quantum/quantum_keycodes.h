@@ -218,13 +218,11 @@
 #define SQ_R(n) (n < SEQUENCER_RESOLUTIONS ? SEQUENCER_RESOLUTION_MIN + n : KC_NO)
 #define SQ_T(n) (n < SEQUENCER_TRACKS ? SEQUENCER_TRACK_MIN + n : KC_NO)
 
-// Pointing device mode keys 16 modes max
-// pointing device mode key macros
-#define POINTING_MODE_COUNT ((QK_POINTING_MODE_MAX - QK_POINTING_MODE + 1) / 2)
+// Pointing device mode key macros (16 modes max)
 // Momentary scroll mode
-#define PM_MO(pm) (MIN((pm), (POINTING_MODE_COUNT - 1)) + QK_POINTING_MODE)
+#define PM_MO(pm) (MIN((pm), (QK_POINTING_MODE_MO_MAX - QK_POINTING_MODE_MO + 1)) + QK_POINTING_MODE_MO)
 // Toggle default scroll mode
-#define PM_TG(pm) (MIN((pm), (POINTING_MODE_COUNT - 1)) + QK_POINTING_MODE + POINTING_MODE_COUNT)
+#define PM_TG(pm) (MIN((pm), (QK_POINTING_MODE_TG_MAX - QK_POINTING_MODE_TG + 1)) + QK_POINTING_MODE_TG)
 
 // Default Pointing device pointing modes
 enum pointing_device_mode_list {
@@ -234,14 +232,10 @@ enum pointing_device_mode_list {
     PM_CARET,
     PM_HISTORY,
     PM_VOLUME,
-// safe range for custom modes with built in keycodes
-#ifndef EXTRAKEY_ENABLE
-    PM_SAFE_RANGE = PM_VOLUME,
-#else
+    // safe range for custom modes with built in keycodes
     PM_SAFE_RANGE,
-#endif
     // range for custom modes requiring custom activation/new keycodes
-    PM_ADVANCED_RANGE_START = QK_POINTING_MODE_MAX - QK_POINTING_MODE + 1
+    PM_ADVANCED_RANGE_START = QK_POINTING_MODE_TG_MAX - QK_POINTING_MODE_TG + 2
 };
 
 // pointing mode aliases

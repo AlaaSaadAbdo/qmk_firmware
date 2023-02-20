@@ -528,12 +528,12 @@ bool process_pointing_mode_records(uint16_t keycode, keyrecord_t* record) {
     switch (keycode) {
         // handle built in keycods for bottom 16 pointing modes (0-15)
         // momentary
-        case POINTING_MODE_MO ... POINTING_MODE_MO_MAX:
-            pointing_mode_key_momentary((keycode - POINTING_MODE_MO) & (POINTING_MODE_COUNT - 1), record->event.pressed);
+        case QK_POINTING_MODE_MO ... QK_POINTING_MODE_MO_MAX:
+            pointing_mode_key_momentary((keycode - QK_POINTING_MODE_MO) & (QK_POINTING_MODE_MO_MAX - QK_POINTING_MODE_MO), record->event.pressed);
             return true; // allow further processing
         // toggle
-        case POINTING_MODE_TG ... POINTING_MODE_TG_MAX:
-            pointing_mode_key_toggle((keycode - POINTING_MODE_TG) & (POINTING_MODE_COUNT - 1), record->event.pressed);
+        case QK_POINTING_MODE_TG ... QK_POINTING_MODE_TG_MAX:
+            pointing_mode_key_toggle((keycode - QK_POINTING_MODE_TG) & (QK_POINTING_MODE_TG_MAX - QK_POINTING_MODE_TG), record->event.pressed);
             return true; // allow further processing
         // end
         default:

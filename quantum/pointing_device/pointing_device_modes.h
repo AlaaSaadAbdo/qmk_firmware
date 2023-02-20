@@ -72,16 +72,10 @@
 #    error DEFAULT_DIVISOR set to zero
 #endif
 /* check valid keycode range */
-#if (!((POINTING_MODE_COUNT - 1) & (~POINTING_MODE_COUNT)))
-#    pragma message "Total number of keycodes in QK_POINTING_MODE range must be a power of 2"
-#    error QK_POINTING_MODE keycode range is not a power of two
+#if (QK_POINTING_MODE_MO_MAX - QK_POINTING_MODE_MO != QK_POINTING_MODE_TG_MAX - QK_POINTING_MODE_TG)
+#    pragma message "QK_POINTING_MODE_MO keycode range is not equal to the QK_POINTING_MODE_TG keycode range, check keycode constants"
+#    error QK_POINTING_MODE_MO keycode range is not equal to the QK_POINTING_MODE_TG keycode range
 #endif
-
-/* keycode setup */
-#define POINTING_MODE_MO QK_POINTING_MODE
-#define POINTING_MODE_MO_MAX (POINTING_MODE_MO + POINTING_MODE_COUNT - 1)
-#define POINTING_MODE_TG (POINTING_MODE_MO_MAX + 1)
-#define POINTING_MODE_TG_MAX QK_POINTING_MODE_MAX
 
 /* enum typedefs */
 enum pointing_device_directions { PD_DOWN = 0, PD_UP, PD_LEFT, PD_RIGHT };
