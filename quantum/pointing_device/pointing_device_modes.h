@@ -151,7 +151,11 @@ bool           process_pointing_mode_records(uint16_t keyrecord, keyrecord_t* re
 #    define POINTING_MODE_LAYOUT(Y_POS, X_NEG, X_POS, Y_NEG) \
         { X_NEG, Y_NEG, Y_POS, X_POS }
 #    ifndef POINTING_MODE_MAP_START
-#        define POINTING_MODE_MAP_START PM_SAFE_RANGE
+#        ifdef EXTRAKEY_ENABLE
+#            define POINTING_MODE_MAP_START PM_SAFE_RANGE
+#        else
+#            define POINTING_MODE_MAP_START PM_VOLUME
+#        endif
 #    endif
 
 extern const uint16_t PROGMEM pointing_device_mode_maps[][4];

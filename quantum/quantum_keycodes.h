@@ -220,9 +220,9 @@
 
 // Pointing device mode key macros (16 modes max)
 // Momentary scroll mode
-#define PM_MO(pm) (MIN((pm), (QK_POINTING_MODE_MO_MAX - QK_POINTING_MODE_MO + 1)) + QK_POINTING_MODE_MO)
+#define PM_MO(pm) (MIN((pm), (QK_POINTING_MODE_MO_MAX - QK_POINTING_MODE_MO)) + QK_POINTING_MODE_MO)
 // Toggle default scroll mode
-#define PM_TG(pm) (MIN((pm), (QK_POINTING_MODE_TG_MAX - QK_POINTING_MODE_TG + 1)) + QK_POINTING_MODE_TG)
+#define PM_TG(pm) (MIN((pm), (QK_POINTING_MODE_TG_MAX - QK_POINTING_MODE_TG)) + QK_POINTING_MODE_TG)
 
 // Default Pointing device pointing modes
 enum pointing_device_mode_list {
@@ -235,7 +235,7 @@ enum pointing_device_mode_list {
     // safe range for custom modes with built in keycodes
     PM_SAFE_RANGE,
     // range for custom modes requiring custom activation/new keycodes
-    PM_ADVANCED_RANGE_START = QK_POINTING_MODE_TG_MAX - QK_POINTING_MODE_TG + 2
+    PM_ADVANCED_RANGE_START = QK_POINTING_MODE_TG_MAX - QK_POINTING_MODE_TG + 1
 };
 
 // pointing mode aliases
