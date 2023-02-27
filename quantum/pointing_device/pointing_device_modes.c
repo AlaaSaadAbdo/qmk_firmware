@@ -26,12 +26,7 @@ static uint8_t        get_pointing_mode_divisor(void);
 static uint8_t        divisor_postprocess(uint8_t divisor);
 
 // local variables
-static pointing_modes_context_t pm_context = {
-    .current_device = POINTING_DEVICE_MODES_DEFAULT_DEVICE,
-    .tg_mode_id[0 ... POINTING_DEVICE_MODES_CONTROL_COUNT - 1] = POINTING_MODE_DEFAULT,
-    .divisor = POINTING_DEFAULT_DIVISOR,
-    .mode[0 ... POINTING_DEVICE_MODES_CONTROL_COUNT - 1] = { .id = POINTING_MODE_DEFAULT }
-};
+static pointing_modes_context_t pm_context = {.current_device = POINTING_DEVICE_MODES_DEFAULT_DEVICE, .tg_mode_id[0 ... POINTING_DEVICE_MODES_CONTROL_COUNT - 1] = POINTING_MODE_DEFAULT, .divisor = POINTING_DEFAULT_DIVISOR, .mode[0 ... POINTING_DEVICE_MODES_CONTROL_COUNT - 1] = {.id = POINTING_MODE_DEFAULT}};
 
 // set up clamping and divisor application functions
 static inline int8_t clamp_int_16_to_8(int16_t value) {
@@ -119,7 +114,7 @@ static uint8_t get_pointing_mode_direction(void) {
 void pointing_mode_reset(void) {
     memset(&pm_context.mode[pm_context.current_device], 0, sizeof(pointing_mode_t));
     pm_context.mode[pm_context.current_device].id = pm_context.tg_mode_id[pm_context.current_device];
-    pm_context.divisor                 = POINTING_DEFAULT_DIVISOR;
+    pm_context.divisor                            = POINTING_DEFAULT_DIVISOR;
 }
 
 /**

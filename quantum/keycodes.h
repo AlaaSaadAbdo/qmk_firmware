@@ -82,11 +82,7 @@ enum qk_keycode_ranges {
     QK_QUANTUM_MAX                 = 0x7DFF,
     QK_KB                          = 0x7E00,
     QK_KB_MAX                      = 0x7E3F,
-    QK_KB                          = 0x7E00,
-    QK_KB_MAX                      = 0x7EFF,
     QK_USER                        = 0x7E40,
-    QK_USER_MAX                    = 0x7FFF,
-    QK_USER                        = 0x7F00,
     QK_USER_MAX                    = 0x7FFF,
     QK_UNICODEMAP                  = 0x8000,
     QK_UNICODEMAP_MAX              = 0xBFFF,
@@ -1400,8 +1396,6 @@ enum qk_keycode_defines {
 #define IS_QK_LIGHTING(code) ((code) >= QK_LIGHTING && (code) <= QK_LIGHTING_MAX)
 #define IS_QK_QUANTUM(code) ((code) >= QK_QUANTUM && (code) <= QK_QUANTUM_MAX)
 #define IS_QK_KB(code) ((code) >= QK_KB && (code) <= QK_KB_MAX)
-#define IS_QK_KB(code) ((code) >= QK_KB && (code) <= QK_KB_MAX)
-#define IS_QK_USER(code) ((code) >= QK_USER && (code) <= QK_USER_MAX)
 #define IS_QK_USER(code) ((code) >= QK_USER && (code) <= QK_USER_MAX)
 #define IS_QK_UNICODEMAP(code) ((code) >= QK_UNICODEMAP && (code) <= QK_UNICODEMAP_MAX)
 #define IS_QK_UNICODE(code) ((code) >= QK_UNICODE && (code) <= QK_UNICODE_MAX)

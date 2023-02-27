@@ -72,16 +72,13 @@
 
 /* enums */
 enum pointing_device_directions {
-    PD_DOWN  = 0, // 0b00
-    PD_UP,        // 0b01
-    PD_LEFT,      // 0b10
-    PD_RIGHT      // 0b11
+    PD_DOWN = 0, // 0b00
+    PD_UP,       // 0b01
+    PD_LEFT,     // 0b10
+    PD_RIGHT     // 0b11
 };
 
-enum pointing_devide_mode_devices {
-    PM_RIGHT_SIDE = 0,
-    PM_LEFT_SIDE
-};
+enum pointing_devide_mode_devices { PM_RIGHT_SIDE = 0, PM_LEFT_SIDE };
 
 /* local data structures */
 typedef struct {
@@ -92,10 +89,10 @@ typedef struct {
 
 /* context structure to track additional data */
 typedef struct {
-    uint8_t current_device;
-    uint8_t tg_mode_id[POINTING_DEVICE_MODES_CONTROL_COUNT];
-    uint8_t direction;
-    uint8_t divisor;
+    uint8_t         current_device;
+    uint8_t         tg_mode_id[POINTING_DEVICE_MODES_CONTROL_COUNT];
+    uint8_t         direction;
+    uint8_t         divisor;
     pointing_mode_t mode[POINTING_DEVICE_MODES_CONTROL_COUNT];
 } pointing_modes_context_t;
 
@@ -132,7 +129,7 @@ bool    pointing_mode_divisor_postprocess_kb(uint8_t* divisor);             // k
 bool    pointing_mode_divisor_postprocess_user(uint8_t* divisor);           // user/keymap level modifying of divisors after get_pointing_mode_divisor_* stack
 
 /* ----------Core functions (only used in custom pointing devices or key processing)------------------------------ */
-report_mouse_t pointing_device_modes_task(report_mouse_t mouse_report);                // intercepts mouse_report (in pointing_device_task_* stack)
+report_mouse_t pointing_device_modes_task(report_mouse_t mouse_report); // intercepts mouse_report (in pointing_device_task_* stack)
 
 /* ----------Pointing Device mode Mapping------------------------------------------------------------------------- */
 #ifndef POINTING_MODE_MAP_COUNT
