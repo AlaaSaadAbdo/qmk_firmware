@@ -22,6 +22,7 @@
 /* ----------Handling pointing mode id changes on keypress-------------------------------------------------------- */
 void pointing_mode_key_momentary(uint8_t mode_id, bool pressed); // momentary change of pointing mode while button is held
 void pointing_mode_key_toggle(uint8_t mode_id, bool pressed);    // toggle pointing mode on/off on keypress
+void pointing_mode_key_set_device(uint8_t device, bool pressed); // set current device
 
 /* ----------For builtin keycodes--------------------------------------------------------------------------------- */
 bool process_pointing_mode_records(uint16_t keyrecord, keyrecord_t* record); // handle processing of built in keyrecords (in process_record stack)

@@ -51,6 +51,18 @@ void pointing_mode_key_toggle(uint8_t mode_id, bool pressed) {
 }
 
 /**
+ * @brief Handle keypress to change current device
+ *
+ * Set current device to device on key release
+ *
+ * @params device[in]  uint8_t
+ * @params pressed[in] bool
+ */
+void pointing_mode_key_set_device(uint8_t device, bool pressed) {
+    if (!pressed) set_pointing_mode_device(device);
+}
+
+/**
  * @brief Core function to process pointing mode key records
  *
  * Only handles built in keyrecords and functions
@@ -71,6 +83,22 @@ bool process_pointing_mode_records(uint16_t keycode, keyrecord_t* record) {
         case QK_POINTING_MODE_TG ... QK_POINTING_MODE_TG_MAX:
             pointing_mode_key_toggle((keycode - QK_POINTING_MODE_TG) & (QK_POINTING_MODE_TG_MAX - QK_POINTING_MODE_TG), record->event.pressed);
             return true; // allow further processing
+
+#    if (POINTING_MODES_DEVICE_ID_MAX > 0)
+        // utils: Cycle devices
+        case QK_PM_CYCLE_DEVICES:
+            pointing_mode_key_set_device(get_pointing_mode_device() + 1, record->event.pressed);
+            return true;
+        // utils: DEVICE RIGHT
+        case QK_PM_DEVICE_RIGHT:
+            pointing_mode_key_set_device(PM_RIGHT_SIDE, record->event.pressed);
+            return true;
+        // utils: DEVICE LEFT
+        case QK_PM_DEVICE_LEFT:
+            pointing_mode_key_set_device(PM_RIGHT_SIDE, record->event.pressed);
+            return true;
+#    endif
+
         // end
         default:
             return true;
