@@ -768,6 +768,7 @@ The first 15 pointing device modes can easily be activated by keypress through a
 !> For pointing device modes above mode id 15 a custom keycode would need to be added unless the mode is being activated through some other means (such as on specific layers see (advanced use)[#pointing-modes-advanced-use] below)
 
 #### Toggled Pointing Device Modes vs Momentary Pointing Modes
+
 Pointing device modes activated by toggle type functions/macros have their mode id saved until toggled off or a different mode is activated by toggle overwriting the last toggle mode.  When a Momentary type function or key is used while another mode is toggled the toggled mode will be reactivated once the momentary mode is released. Toggling a mode on will overwrite both the saved toggled mode id (_if different than current_) as well as the current mode id while using a momentary type key will only overwrite the current mode.
 
 #### Built-in Pointing Device Modes
@@ -780,9 +781,10 @@ Pointing device modes activated by toggle type functions/macros have their mode 
 | `PM_CARET`                | `PM_CRT`  |     3   | Taps arrow keys based on pointing input  `x->(<-, ->)` `y->(^, v)`                                                                                          |
 | `PM_HISTORY`              | `PM_HST`  |     4   | x movement of pointing device to undo and redo macros  `x->(C(KC_Z)), C(KC_Y)`  `y->ignored`                                                                |
 | `PM_VOLUME`               | `PM_VOL`  |     5   | y movement of pointing device to media volume up/down (requires `EXTRAKEY_ENABLED`) `x->ignored` `y->(KC_VOLU, KC_VOLD)`                                    |
-| `PM_SAFE_RANGE`           |  _None_   |   5-6   | Start of free mode id range supported by the `PM_MO()` and `PM_TG()` key macros (_default start of mode maps and_)                                          |
-| `PM_ADVANCED_RANGE` |  _None_   |    16   | Start of mode id range that will require the addition of custom keycode to activate them (_new keycodes, on layers etc._)                                   |
-   
+| `PM_SAFE_RANGE`           |  _None_   |   5-6   | Start of free mode id range supported by the `PM_MO()` and `PM_TG()` key macros (_default start of mode maps_)                                              |
+| `PM_ADVANCED_RANGE_START` |  _None_   |    16   | Start of mode id range that will require the addition of custom keycode to activate them (_new keycodes, on layers etc._)                                   |
+
+
 ***Notes:***   
 -***These modes can all be overwritten with the exception of `PM_NONE`.***   
 -***Mode ids 6-15 are free to be used for custom modes without overwriting a mode and will be supported by the built in keycode macros `PM_MO(<pm>)` and `PM_TG(<pm>)` (see adding custom modes below)***
@@ -832,6 +834,8 @@ The `POINTING_DRAG_DIVISOR` default value of 16 is based on having mouse setting
 !> `POINTING_PRECISION_DIVISOR` default will half cursor speed when active (_divisor of 2_) but a divisor of 4 is fine to use as well but the cursor will be quite a bit slower, however divisors of 8 or greater will likely only work well for very high cpi settings.
 
 Recommended settings for `POINTING_CARET_DIVISOR_V` and `POINTING_CARET_DIVISOR_H` are `16` and `32` respectively which will give preference to horizontal caret movement (`KC_LEFT`, `KC_RIGHT`) over vertical (`KC_UP`, `KC_DOWN`) giving even more stability to horizontal movement (_reducing errant up and down movement_).
+
+!> `POINTING_TAP_DELAY` defaults to `TAP_CODE_DELAY` so if `TAP_CODE_DELAY` is set high it can cause some noticable latency on some modes such as `PM_CARET`
 
 ### Basic Custom Modes
 
@@ -937,15 +941,15 @@ The following callbacks can be used to overwrite built in mode divisors or to se
 uint8_t get_pointing_mode_divisor_user(uint8_t mode_id, uint8_t direction) {
     switch(mode_id) {
 
-        case PM_BROW:
+        case PM_HALF_V:
             // half speed for vertical axis
             return direction < PD_LEFT ? 128 : 64;
 
-        case PM_RGB_MD_VA:
+        case PM_HALF_H:
             // half speed for horizontal axis
             return direction < PD_LEFT ? 64 : 128;
 
-        case PM_RGB_HU_SA:
+        case PM_ALL_DIFF:
             // example of unique divisor for each mode (not actually recommended for this mode (64 would be a good divisor here))
             switch(direction) {
                 case PD_DOWN:
@@ -958,7 +962,7 @@ uint8_t get_pointing_mode_divisor_user(uint8_t mode_id, uint8_t direction) {
                     return 128;
             }
 
-        case PM_RGB_SPEED:
+        case PM_SLOW:
             return 64; // could skip adding this if default if POINTING_DEFAULT_DIVISOR is 64
     }
 
@@ -967,56 +971,29 @@ uint8_t get_pointing_mode_divisor_user(uint8_t mode_id, uint8_t direction) {
 ```
 This code assigns some divisors for some of the modes added in a previous code example showing some of the things that are possible with defining divisors. It could also be possible to make divisors adjust based on global variables such as a dynamic divisor adjustment term (_note that if a divisor of zero is returned it will default to_ `POINTING_DIVISOR_DEFAULT`).
 
-#### Another approach to assigning divisors
+### Using `pointing_mode_divisor_postprocess` stack
+
+The post process stack is intended to allow for modification of divisors after they have already been assigned by `get_pointing_mode_divisor` stack or `pointing_mode_divisor_override`. This allows for additional precision modes or modification of certain modes devisors or different default divisors depending on conditions.
+
+#### example code:
 
 ```c
-// added to keymap.c
-// assuming poinding device enum and maps from example above
-uint8_t get_pointing_mode_divisor_user(uint8_t mode_id, uint8_t direction) {
-    uint8_t divisor = 0;
-    switch(mode_id) {
+//in keymap.c
+static bool    super_precision;
+static uint8_t dynamic_default_divisor;
 
-        case PM_BROW:
-            // half speed for vertical axis
-            divisor = direction < PD_LEFT ? 128 : 64;
-            break;
-
-        case PM_RGB_MD_VA:
-            // half speed for horizontal axis
-            divisor = direction < PD_LEFT ? 64 : 128;
-            break;
-
-        case PM_RGB_HU_SA:
-            // example of unique divisor for each mode (not actually recommended for this mode (64 would be a good divisor here))
-            switch(direction) {
-                case PD_DOWN:
-                    divisor = 32;
-                    break;
-                case PD_UP:
-                    divisor = 64;
-                    break;
-                case PD_LEFT:
-                    divisor = 16;
-                    break;
-                case PD_RIGHT:
-                    divisor = 128;
-                    break;
-            }
-            break;
-
-        case PM_RGB_SPEED:
-            divisor = 64;
-            break;
-    }
-    // additional precision mode activated by bool that is set elsewhere (e.g. custom key or based on layer)
-    // Something like this might be better suited to adding to pointing_mode_divisor_post_processing_* stack
+#define constrain_div(amt) (amt > UINT8_MAX ? UINT8_MAX : amt)
+bool pointing_mode_divisor_postprocess_user(uint8_t* divisor) {
     if(super_precision) {
-        divisor = ((uint16_t)divisor * 4) > 255 ? 255 : (divisor * 4);
+        *divisor = constrain_div(*divisor * 4);
     }
-    return divisor;
+    if(!(*divisor)) {
+        *divisor = dynamic_default_divisor;
+        return false; // force divisor processing to stop here
+    }
+    return true; // allow divisor processing to continue
 }
 ```
-The above alternative method uses a variable that defaults to zero that is set to the correct divisor and then returned at the end of the function.  This allows for additional modification of the divisor before it is returned such as having a variable that doubles the divisor or could possibly add or subtract a dynamic value.  Zero values should be returned before any addition or subtraction step as otherwise this will overwrite all other divisors.  Additionally any built in modes that are intended to be affected by these modifications should be redefined here as well.
 
 ### Creating Custom pointing mode keycodes
 
