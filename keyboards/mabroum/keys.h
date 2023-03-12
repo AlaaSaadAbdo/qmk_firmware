@@ -27,4 +27,19 @@ enum keycodes {
     DWRD,
     QUIT,
     SAVE,
+#    ifdef POINTING_DEVICE_MODES_ENABLE
+    ML_TOG,
+    PML_DRAG,
+    PMR_DRAG,
+    PML_SNIPE,
+    PMR_SNIPE,
+    PML_CARET,
+    PMR_CARET,
+    PML_VOLUME,
+    PMR_VOLUME,
+    PML_DRAG_TOG,
+    PMR_DRAG_TOG,
+    PML_SNIPE_TOG,
+    PMR_SNIPE_TOG,
+#    endif
 };

@@ -476,7 +476,7 @@ report_mouse_t pointing_device_task_combined(report_mouse_t left_report, report_
             break;
         default:
             left_report = pointing_device_modes_task(left_report);
-    }[
+    }
 #        else
     // both sides controlled independently
     // save current device id
@@ -485,7 +485,7 @@ report_mouse_t pointing_device_task_combined(report_mouse_t left_report, report_
     right_report = pointing_device_modes_task(right_report);
 
     set_pointing_mode_device(PM_LEFT_DEVICE);
-    left_report = pointing_device_modes_task(left_report);]
+    left_report = pointing_device_modes_task(left_report);
     // set device id back
     set_pointing_mode_device(current_device);
 #        endif
