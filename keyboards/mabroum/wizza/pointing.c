@@ -184,56 +184,76 @@ bool mab_process_pointing_keys(uint16_t keycode, keyrecord_t *record) {
                 mab_cycle_pointer_default_dpi(/* forward= */ has_shift_mod());
             }
             break;
-        case SNIPING_MODE:
-            if (mab_get_pointer_dragscroll_enabled()) {
-              mab_set_pointer_dragscroll_enabled(false);
-              #ifdef QUANTUM_PAINTER_ENABLE
-                dragscroll_set_user(false);
-              #endif
-            }
-            mab_set_pointer_sniping_enabled(record->event.pressed);
-            #ifdef QUANTUM_PAINTER_ENABLE
-              sniping_set_user(record->event.pressed);
-            #endif
-            break;
-        case SNIPING_MODE_TOGGLE:
+        case PMR_DRAG:
             if (record->event.pressed) {
-                if (mab_get_pointer_dragscroll_enabled()) {
-                  mab_set_pointer_dragscroll_enabled(false);
-                  #ifdef QUANTUM_PAINTER_ENABLE
-                    dragscroll_set_user(false);
-                  #endif
+                if (get_toggled_pointing_mode_id() != 0) {
+                  set_pointing_mode_id(0);
                 }
-                mab_set_pointer_sniping_enabled(!mab_get_pointer_sniping_enabled());
-                #ifdef QUANTUM_PAINTER_ENABLE
-                  sniping_set_user(mab_get_pointer_sniping_enabled());
-                #endif
-            }
+                set_pointing_mode_device(1);
+                toggle_pointing_mode_id(2);
+            } 
             break;
-        case DRAGSCROLL_MODE:
-            if (mab_get_pointer_sniping_enabled()) {
-              mab_set_pointer_sniping_enabled(false);
-              #ifdef QUANTUM_PAINTER_ENABLE
-                sniping_set_user(false);
-              #endif
-            }
-            mab_set_pointer_dragscroll_enabled(record->event.pressed);
-            #ifdef QUANTUM_PAINTER_ENABLE
-              dragscroll_set_user(record->event.pressed);
-            #endif
-            break;
-        case DRAGSCROLL_MODE_TOGGLE:
+        case PML_DRAG:
             if (record->event.pressed) {
-                if (mab_get_pointer_sniping_enabled()) {
-                  mab_set_pointer_sniping_enabled(false);
-                  #ifdef QUANTUM_PAINTER_ENABLE
-                    sniping_set_user(false);
-                  #endif
+                if (get_toggled_pointing_mode_id() != 0) {
+                  set_pointing_mode_id(0);
                 }
-                mab_set_pointer_dragscroll_enabled(!mab_get_pointer_dragscroll_enabled());
-                #ifdef QUANTUM_PAINTER_ENABLE
-                  dragscroll_set_user(mab_get_pointer_dragscroll_enabled());
-                #endif
+                set_pointing_mode_device(0);
+                toggle_pointing_mode_id(2);
+            }
+            break;
+        case PML_SNIPE:
+            if (record->event.pressed) {
+                if (get_toggled_pointing_mode_id() != 0) {
+                  set_pointing_mode_id(0);
+                }
+                set_pointing_mode_device(0);
+                toggle_pointing_mode_id(1);
+            }
+            break;
+        case PMR_SNIPE:
+            if (record->event.pressed) {
+                if (get_toggled_pointing_mode_id() != 0) {
+                  set_pointing_mode_id(0);
+                }
+                set_pointing_mode_device(1);
+                toggle_pointing_mode_id(1);
+            }
+            break;
+        case PML_CARET:
+            if (record->event.pressed) {
+                if (get_toggled_pointing_mode_id() != 0) {
+                  set_pointing_mode_id(0);
+                }
+                set_pointing_mode_device(0);
+                toggle_pointing_mode_id(3);
+            }
+            break;
+        case PMR_CARET:
+            if (record->event.pressed) {
+                if (get_toggled_pointing_mode_id() != 0) {
+                  set_pointing_mode_id(0);
+                }
+                set_pointing_mode_device(1);
+                toggle_pointing_mode_id(3);
+            }
+            break;
+        case PML_VOLUME:
+            if (record->event.pressed) {
+                if (get_toggled_pointing_mode_id() != 0) {
+                  set_pointing_mode_id(0);
+                }
+                set_pointing_mode_device(0);
+                toggle_pointing_mode_id(5);
+            }
+            break;
+        case PMR_VOLUME:
+            if (record->event.pressed) {
+                if (get_toggled_pointing_mode_id() != 0) {
+                  set_pointing_mode_id(0);
+                }
+                set_pointing_mode_device(1);
+                toggle_pointing_mode_id(5);
             }
             break;
         case ACCELERATION_TOGGLE:

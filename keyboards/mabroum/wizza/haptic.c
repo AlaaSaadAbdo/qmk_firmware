@@ -37,6 +37,15 @@ bool mab_process_record_haptic(uint16_t keycode, keyrecord_t *record) {
         case G(KC_V):
         case G(KC_C):
         case G(KC_X):
+        case ML_TOG:
+        case PML_DRAG:
+        case PMR_DRAG:
+        case PML_SNIPE:
+        case PMR_SNIPE:
+        case PML_CARET:
+        case PMR_CARET:
+        case PML_VOLUME:
+        case PMR_VOLUME:
             if (record->event.pressed) {
                 DRV_pulse(medium_click1);
             }
@@ -46,6 +55,7 @@ bool mab_process_record_haptic(uint16_t keycode, keyrecord_t *record) {
         case SW_CG:
         case CG_TOGG:
         case POINTER_DEFAULT_DPI_FORWARD:
+        case POINTER_DEFAULT_DPI_REVERSE:
         case EE_CLR:
         case QK_BOOT:
             if (record->event.pressed) {

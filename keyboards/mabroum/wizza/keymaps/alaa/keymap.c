@@ -62,8 +62,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                     MO_NAV, KC_SPACE,       OSM(MOD_LSFT), MO_SYM,
                                     KC_BTN3, KC_BTN2, KC_BTN1, KC_BTN1, KC_BTN2, KC_BTN3,
                                     // click  , left        , up       , right       , down
-                                    PMR_SNIPE , PMR_DRAG,   PMR_CARET, PMR_VOLUME,   DPI_MOD,
-                                    PML_SNIPE , PML_VOLUME, PML_CARET, PML_DRAG,     DPI_RMOD
+                                    PMR_SNIPE , PMR_DRAG,   PMR_CARET, PMR_VOLUME,   KC_NO,
+                                    PML_SNIPE , PML_VOLUME, PML_CARET, PML_DRAG,     KC_NO
 
     ),
     [APT] = LAYOUT_23332(
@@ -73,8 +73,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                         MO_NAV, KC_SPACE,       OSM(MOD_LSFT), MO_SYM,
                                         KC_BTN3, KC_BTN2, KC_BTN1, KC_BTN1, KC_BTN2, KC_BTN3,
                                     // click  , left        , up       , right       , down
-                                    PMR_SNIPE , PMR_DRAG,   PMR_CARET, PMR_VOLUME,   DPI_MOD,
-                                    PML_SNIPE , PML_VOLUME, PML_CARET, PML_DRAG,     DPI_RMOD
+                                    PMR_SNIPE , PMR_DRAG,   PMR_CARET, PMR_VOLUME,   KC_NO,
+                                    PML_SNIPE , PML_VOLUME, PML_CARET, PML_DRAG,     KC_NO
     ),
     [NAV] = LAYOUT_23332(
         SCRNSHT,   KC_ENT, KC_BSPC, KC_TAB,  KC_DEL,            DWRD,    KC_NO,     KC_UP,    QUIT,       WRKFLW1,
@@ -267,70 +267,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
               lv_event_send(ui_Layer_Indicator, USER_EVENT_ACTIVE_LAYER_CHANGE, NULL);
             }
             return false;
-        case PMR_DRAG:
-            if (record->event.pressed) {
-                DRV_pulse(medium_click1);
-                set_pointing_mode_id(0);
-                set_pointing_mode_device(1);
-                toggle_pointing_mode_id(2);
-            } 
-            break;
-        case PML_DRAG:
-            if (record->event.pressed) {
-                DRV_pulse(medium_click1);
-                set_pointing_mode_id(0);
-                set_pointing_mode_device(0);
-                toggle_pointing_mode_id(2);
-            }
-            break;
-        case PML_SNIPE:
-            if (record->event.pressed) {
-                DRV_pulse(medium_click1);
-                set_pointing_mode_id(0);
-                set_pointing_mode_device(0);
-                toggle_pointing_mode_id(1);
-            }
-            break;
-        case PMR_SNIPE:
-            if (record->event.pressed) {
-                DRV_pulse(medium_click1);
-                set_pointing_mode_id(0);
-                set_pointing_mode_device(1);
-                toggle_pointing_mode_id(1);
-            }
-            break;
-        case PML_CARET:
-            if (record->event.pressed) {
-                DRV_pulse(medium_click1);
-                set_pointing_mode_id(0);
-                set_pointing_mode_device(0);
-                toggle_pointing_mode_id(3);
-            }
-            break;
-        case PMR_CARET:
-            if (record->event.pressed) {
-                DRV_pulse(medium_click1);
-                set_pointing_mode_id(0);
-                set_pointing_mode_device(1);
-                toggle_pointing_mode_id(3);
-            }
-            break;
-        case PML_VOLUME:
-            if (record->event.pressed) {
-                DRV_pulse(medium_click1);
-                set_pointing_mode_id(0);
-                set_pointing_mode_device(0);
-                toggle_pointing_mode_id(5);
-            }
-            break;
-        case PMR_VOLUME:
-            if (record->event.pressed) {
-                DRV_pulse(medium_click1);
-                set_pointing_mode_id(0);
-                set_pointing_mode_device(1);
-                toggle_pointing_mode_id(5);
-            }
-            break;
         default:
             return true;
     }

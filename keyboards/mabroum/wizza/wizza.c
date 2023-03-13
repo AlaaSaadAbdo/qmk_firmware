@@ -57,12 +57,19 @@ void keyboard_post_init_user(void) {
 
   /* setPinOutput(LCD_POWER_ENABLE_PIN); */
   /* writePinHigh(LCD_POWER_ENABLE_PIN); */
-
-  display = qp_st7789_make_spi_device(200, 320, DISPLAY_CS_PIN_RIGHT, DISPLAY_DC_PIN_RIGHT, DISPLAY_RST_PIN_RIGHT, 8, 3);
-  qp_set_viewport_offsets(display, 0, 34);
-  qp_init(display, QP_ROTATION_270); // Initialise the display
-  qp_power(display, true);
-  qp_rect(display, 0, 0, 319, 171, 0, 0, 0, true);
+  if (is_keyboard_left()) {
+    display = qp_st7789_make_spi_device(200, 320, DISPLAY_CS_PIN, DISPLAY_DC_PIN, DISPLAY_RST_PIN, 8, 3);
+    qp_set_viewport_offsets(display, 0, 34);
+    qp_init(display, QP_ROTATION_270); // Initialise the display
+    qp_power(display, true);
+    qp_rect(display, 0, 0, 319, 171, 0, 0, 0, true);
+  } else {
+    display = qp_st7789_make_spi_device(200, 320, DISPLAY_CS_PIN_RIGHT, DISPLAY_DC_PIN_RIGHT, DISPLAY_RST_PIN_RIGHT, 8, 3);
+    qp_set_viewport_offsets(display, 0, 34);
+    qp_init(display, QP_ROTATION_270); // Initialise the display
+    qp_power(display, true);
+    qp_rect(display, 0, 0, 319, 171, 0, 0, 0, true);
+  }
 
   if (qp_lvgl_attach(display)) {     // Attach LVGL to the display
     wait_ms(50);
