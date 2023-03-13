@@ -7,8 +7,5 @@ enum layers {
     APT,
     NAV,
     SYM,
-#ifdef POINTING_DEVICE_AUTO_MOUSE_ENABLE
-    MOUS,
-#endif
 };
 

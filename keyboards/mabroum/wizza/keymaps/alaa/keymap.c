@@ -12,10 +12,6 @@
 // pointing
 #define DPI_MOD POINTER_DEFAULT_DPI_FORWARD
 #define DPI_RMOD POINTER_DEFAULT_DPI_REVERSE
-#define SNIPING SNIPING_MODE
-#define SNP_TOG SNIPING_MODE_TOGGLE
-#define DRGSCRL DRAGSCROLL_MODE
-#define DRG_TOG DRAGSCROLL_MODE_TOGGLE
 #define ACCEL_TOG ACCELERATION_TOGGLE
 
 // global
@@ -63,11 +59,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_W,   KC_F,   KC_M,   KC_P,   KC_B,                   KC_COMMA, KC_X,   KC_QUOTE, KC_J,   KC_K,
         KC_R,   KC_S,   KC_N,   KC_T,   KC_G,                   KC_DOT,   KC_A,   KC_E,     KC_I,   KC_H,
                 KC_C,   KC_L,   KC_D,                                     KC_U,   KC_O,     KC_Y,
-                                        MO_NAV, KC_SPACE,       OSM(MOD_LSFT), MO_SYM,
-                                        KC_BTN3, KC_BTN2, KC_BTN1, KC_BTN1, KC_BTN2, KC_BTN3,
-                                     // click  ,  right           , down    , left          , up
-                                     ACCEL_TOG , KC_AUDIO_VOL_DOWN, SNP_TOG, KC_AUDIO_VOL_UP, DRG_TOG,
-                                     ACCEL_TOG , KC_AUDIO_VOL_DOWN, SNP_TOG, KC_AUDIO_VOL_UP, DRG_TOG
+                                    MO_NAV, KC_SPACE,       OSM(MOD_LSFT), MO_SYM,
+                                    KC_BTN3, KC_BTN2, KC_BTN1, KC_BTN1, KC_BTN2, KC_BTN3,
+                                    // click  , left        , up       , right       , down
+                                    PMR_SNIPE , PMR_DRAG,   PMR_CARET, PMR_VOLUME,   DPI_MOD,
+                                    PML_SNIPE , PML_VOLUME, PML_CARET, PML_DRAG,     DPI_RMOD
 
     ),
     [APT] = LAYOUT_23332(
@@ -76,10 +72,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 KC_C,   KC_G,   KC_D,                                   KC_L,   KC_O,     KC_U,
                                         MO_NAV, KC_SPACE,       OSM(MOD_LSFT), MO_SYM,
                                         KC_BTN3, KC_BTN2, KC_BTN1, KC_BTN1, KC_BTN2, KC_BTN3,
-                                     // click  ,  right           , down    , left          , up
-                                     ACCEL_TOG , KC_AUDIO_VOL_DOWN, SNP_TOG, KC_AUDIO_VOL_UP, DRG_TOG,
-                                     ACCEL_TOG , KC_AUDIO_VOL_DOWN, SNP_TOG, KC_AUDIO_VOL_UP, DRG_TOG
-
+                                    // click  , left        , up       , right       , down
+                                    PMR_SNIPE , PMR_DRAG,   PMR_CARET, PMR_VOLUME,   DPI_MOD,
+                                    PML_SNIPE , PML_VOLUME, PML_CARET, PML_DRAG,     DPI_RMOD
     ),
     [NAV] = LAYOUT_23332(
         SCRNSHT,   KC_ENT, KC_BSPC, KC_TAB,  KC_DEL,            DWRD,    KC_NO,     KC_UP,    QUIT,       WRKFLW1,
@@ -100,15 +95,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                           KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS,
                                           KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS
     ),
-    [MOUS] = LAYOUT_23332(
-PML_CARET,   PML_VOLUME,   PML_SNIPE,  PML_DRAG,  PML_SNIPE_TOG,       PMR_SNIPE_TOG, PMR_DRAG,  PMR_SNIPE, PMR_VOLUME, PMR_CARET,
-        OS_LCTL,  OS_LALT,  OS_LGUI, OS_LSFT,  PML_DRAG_TOG,        PMR_DRAG_TOG, OS_LSFT, OS_LGUI,  OS_RALT,  OS_LCTL,
-                  KC_BTN3,  KC_BTN2, KC_BTN1,                                KC_BTN1, KC_BTN2, KC_BTN3,
-                                          ML_TOG, ML_TOG,            ML_TOG, ML_TOG,
-                                          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS, KC_TRNS,
-                                          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS,
-                                          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS
-    )
 };
 
 bool is_nshot_ignored_key(uint16_t keycode) {
@@ -281,43 +267,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
               lv_event_send(ui_Layer_Indicator, USER_EVENT_ACTIVE_LAYER_CHANGE, NULL);
             }
             return false;
-        case ML_TOG:
-            if (record->event.pressed) {
-                DRV_pulse(medium_click1);
-                layer_off(HDN);
-                return true;
-            }
-            break;
         case PMR_DRAG:
             if (record->event.pressed) {
                 DRV_pulse(medium_click1);
-                set_pointing_mode_device(1);
-                set_pointing_mode_id(2);
-            } 
-            else {
                 set_pointing_mode_id(0);
-                 }
-            break;
-        case PMR_DRAG_TOG:
-            if (record->event.pressed) {
-                DRV_pulse(medium_click1);
                 set_pointing_mode_device(1);
                 toggle_pointing_mode_id(2);
-            }
+            } 
             break;
         case PML_DRAG:
             if (record->event.pressed) {
                 DRV_pulse(medium_click1);
-                set_pointing_mode_device(0);
-                set_pointing_mode_id(2);
-            }
-            else {
                 set_pointing_mode_id(0);
-                 }
-            break;
-        case PML_DRAG_TOG:
-            if (record->event.pressed) {
-                DRV_pulse(medium_click1);
                 set_pointing_mode_device(0);
                 toggle_pointing_mode_id(2);
             }
@@ -325,16 +286,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case PML_SNIPE:
             if (record->event.pressed) {
                 DRV_pulse(medium_click1);
-                set_pointing_mode_device(0);
-                set_pointing_mode_id(1);
-            }
-            else {
                 set_pointing_mode_id(0);
-                 }
-            break;
-        case PML_SNIPE_TOG:
-            if (record->event.pressed) {
-                DRV_pulse(medium_click1);
                 set_pointing_mode_device(0);
                 toggle_pointing_mode_id(1);
             }
@@ -342,16 +294,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case PMR_SNIPE:
             if (record->event.pressed) {
                 DRV_pulse(medium_click1);
-                set_pointing_mode_device(1);
-                set_pointing_mode_id(1);
-            }
-            else {
                 set_pointing_mode_id(0);
-                 }
-            break;
-        case PMR_SNIPE_TOG:
-            if (record->event.pressed) {
-                DRV_pulse(medium_click1);
                 set_pointing_mode_device(1);
                 toggle_pointing_mode_id(1);
             }
@@ -359,42 +302,34 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case PML_CARET:
             if (record->event.pressed) {
                 DRV_pulse(medium_click1);
-                set_pointing_mode_device(0);
-                set_pointing_mode_id(3);
-            }
-            else {
                 set_pointing_mode_id(0);
-                 }
+                set_pointing_mode_device(0);
+                toggle_pointing_mode_id(3);
+            }
             break;
         case PMR_CARET:
             if (record->event.pressed) {
                 DRV_pulse(medium_click1);
-                set_pointing_mode_device(1);
-                set_pointing_mode_id(3);
-            }
-            else {
                 set_pointing_mode_id(0);
-                 }
+                set_pointing_mode_device(1);
+                toggle_pointing_mode_id(3);
+            }
             break;
         case PML_VOLUME:
             if (record->event.pressed) {
                 DRV_pulse(medium_click1);
-                set_pointing_mode_device(0);
-                set_pointing_mode_id(5);
-            }
-            else {
                 set_pointing_mode_id(0);
-                 }
+                set_pointing_mode_device(0);
+                toggle_pointing_mode_id(5);
+            }
             break;
         case PMR_VOLUME:
             if (record->event.pressed) {
                 DRV_pulse(medium_click1);
-                set_pointing_mode_device(1);
-                set_pointing_mode_id(5);
-            }
-            else {
                 set_pointing_mode_id(0);
-                 }
+                set_pointing_mode_device(1);
+                toggle_pointing_mode_id(5);
+            }
             break;
         default:
             return true;
@@ -402,39 +337,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-
-bool is_mouse_record_kb(uint16_t keycode, keyrecord_t* record) {
-    switch(keycode) {
-        case PMR_DRAG:
-        case PML_DRAG:
-        case PML_SNIPE:
-        case PMR_SNIPE:
-        case PMR_DRAG_TOG:
-        case PML_DRAG_TOG:
-        case PML_SNIPE_TOG:
-        case PMR_SNIPE_TOG:
-        case PML_CARET:
-        case PMR_CARET:
-        case PML_VOLUME:
-        case PMR_VOLUME:
-            return true;
-        default:
-            return false;
-    }
-    return  is_mouse_record_user(keycode, record);
-}
-
-void pointing_device_init_user(void) {
-    set_auto_mouse_layer(4); // only required if AUTO_MOUSE_DEFAULT_LAYER is not set to index of <mouse_layer>
-    set_auto_mouse_enable(true);         // always required before the auto mouse feature will work
-}
-
-
-
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
-    [HDN]  =  { ENCODER_CCW_CW(KC_MS_WH_UP, KC_MS_WH_DOWN), ENCODER_CCW_CW(KC_VOLD, KC_VOLU)  },
-    [APT]  =  { ENCODER_CCW_CW(KC_MS_WH_UP, KC_MS_WH_DOWN), ENCODER_CCW_CW(KC_VOLD, KC_VOLU)  },
-    [NAV]  =  { ENCODER_CCW_CW(KC_MS_WH_UP, KC_MS_WH_DOWN), ENCODER_CCW_CW(KC_VOLD, KC_VOLU)  },
-    [SYM]  =  { ENCODER_CCW_CW(KC_MS_WH_UP, KC_MS_WH_DOWN), ENCODER_CCW_CW(KC_VOLD, KC_VOLU)  },
-    [MOUS] =  { ENCODER_CCW_CW(KC_MS_WH_UP, KC_MS_WH_DOWN), ENCODER_CCW_CW(KC_VOLD, KC_VOLU)  },
+    [HDN]  =  { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [APT]  =  { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [NAV]  =  { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [SYM]  =  { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
 };
