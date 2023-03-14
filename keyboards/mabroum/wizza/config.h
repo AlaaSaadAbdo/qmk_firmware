@@ -40,7 +40,7 @@
 
 
 #define PMW33XX_CS_PIN GP21
-#define PMW33XX_CPI 500
+#define PMW33XX_CPI 400
 #define PMW33XX_CS_DIVISOR 8 // needs to be the same as the SHIFTREG_DIVISOR above
 #define POINTING_DEVICE_INVERT_Y
 #define POINTING_DEVICE_ROTATION_90

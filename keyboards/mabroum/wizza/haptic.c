@@ -46,6 +46,7 @@ bool mab_process_record_haptic(uint16_t keycode, keyrecord_t *record) {
         case PMR_CARET:
         case PML_VOLUME:
         case PMR_VOLUME:
+        case CW_TOGG:
             if (record->event.pressed) {
                 DRV_pulse(medium_click1);
             }
@@ -83,6 +84,12 @@ bool mab_process_record_haptic(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             break;
+        /* case MO(2): */
+        /* case MO(3): */
+        /*     if (record->event.pressed) { */
+        /*         DRV_pulse(soft_bump); */
+        /*     } */
+        /*     break; */
         default:
             break;
     }

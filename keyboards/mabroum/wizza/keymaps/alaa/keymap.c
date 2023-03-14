@@ -80,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         SCRNSHT,   KC_ENT, KC_BSPC, KC_TAB,  KC_DEL,            DWRD,    KC_NO,     KC_UP,    QUIT,       WRKFLW1,
         OS_LCTL,   OS_LALT, OS_LGUI,  OS_LSFT, SALL,            KC_DOT,  KC_LEFT,   KC_DOWN,  KC_RIGHT,   WRKFLW2,
                    CUT,    COPY,     PASTE,                                 KC_ENT,    KC_BSPC,  KC_TAB,
-                                          KC_TRNS, KC_TRNS, BL_TOGG, KC_TRNS,
+                                          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                           KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS, KC_TRNS,
                                           KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS,
                                           KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS
@@ -271,6 +271,32 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return true;
     }
     return true;
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    set_pointing_mode_device(0);
+    if (get_toggled_pointing_mode_id() != get_pointing_mode_id()) {
+        set_pointing_mode_id(get_toggled_pointing_mode_id());
+    }
+    set_pointing_mode_device(1);
+    if (get_toggled_pointing_mode_id() != get_pointing_mode_id()) {
+        set_pointing_mode_id(get_toggled_pointing_mode_id());
+    }
+    switch (get_highest_layer(state)) {
+        case NAV:
+            set_pointing_mode_device(0);
+            set_pointing_mode_id(3);
+            break;
+        case SYM:
+            set_pointing_mode_device(1);
+            set_pointing_mode_id(5);
+            break;
+        /* case default: */
+        /*     set_pointing_mode_device(1); */
+        /*     set_pointing_mode_id(2); */
+        /*     break; */
+    }
+    return state;
 }
 
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
