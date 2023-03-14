@@ -274,14 +274,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    set_pointing_mode_device(0);
-    if (get_toggled_pointing_mode_id() != get_pointing_mode_id()) {
-        set_pointing_mode_id(get_toggled_pointing_mode_id());
-    }
-    set_pointing_mode_device(1);
-    if (get_toggled_pointing_mode_id() != get_pointing_mode_id()) {
-        set_pointing_mode_id(get_toggled_pointing_mode_id());
-    }
     switch (get_highest_layer(state)) {
         case NAV:
             set_pointing_mode_device(0);
@@ -289,12 +281,17 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             break;
         case SYM:
             set_pointing_mode_device(1);
-            set_pointing_mode_id(5);
+            set_pointing_mode_id(1);
             break;
-        /* case default: */
-        /*     set_pointing_mode_device(1); */
-        /*     set_pointing_mode_id(2); */
-        /*     break; */
+        default:
+            set_pointing_mode_device(0);
+            if (get_toggled_pointing_mode_id() != get_pointing_mode_id()) {
+                set_pointing_mode_id(get_toggled_pointing_mode_id());
+            }
+            set_pointing_mode_device(1);
+            if (get_toggled_pointing_mode_id() != get_pointing_mode_id()) {
+                set_pointing_mode_id(2);
+            }
     }
     return state;
 }
