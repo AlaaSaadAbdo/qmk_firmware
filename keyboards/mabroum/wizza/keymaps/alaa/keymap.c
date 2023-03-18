@@ -12,7 +12,6 @@
 // pointing
 #define DPI_MOD POINTER_DEFAULT_DPI_FORWARD
 #define DPI_RMOD POINTER_DEFAULT_DPI_REVERSE
-#define ACCEL_TOG ACCELERATION_TOGGLE
 
 // global
 #define SCRNSHT     C(A(S(KC_P)))
@@ -190,8 +189,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 set_pointing_mode_device(1);
                 set_pointing_mode_id(1);
             } else {
-                set_pointing_mode_device(0);
-                set_pointing_mode_id(0);
+                set_pointing_mode_device(1);
+                set_pointing_mode_id(2);
             }
             break;
         case DWRD:

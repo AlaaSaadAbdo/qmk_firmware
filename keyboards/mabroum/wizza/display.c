@@ -199,7 +199,7 @@ void set_pointing_mode_text_value(lv_obj_t* lbl) {
           snprintf(buf, sizeof(buf), "PM: Sniping");
           break;
         case 2:
-          snprintf(buf, sizeof(buf), "PM: Drag Scroll");
+          snprintf(buf, sizeof(buf), "PM: Drag");
           break;
         case 3:
           snprintf(buf, sizeof(buf), "PM: Caret");
@@ -247,14 +247,14 @@ void ui_render_layout(lv_event_t * e) {
 
 uint16_t qmk_lv_get_cpi(void) {
     uint16_t cpi = 0;
-    cpi = mab_get_pointer_sniping_enabled() ? mab_get_pointer_sniping_dpi() : mab_get_pointer_default_dpi();
+    cpi = get_pointing_mode_id() == 1 ? mab_get_pointer_sniping_dpi() : mab_get_pointer_default_dpi();
     return cpi;
 }
 
 
 void lvgl_event_triggers(void) {
     static uint16_t last_cpi   = 0xFFFF;
-    uint16_t curr_cpi   = mab_get_pointer_sniping_enabled() ? mab_get_pointer_sniping_dpi() : mab_get_pointer_default_dpi();
+    uint16_t curr_cpi   = get_pointing_mode_id() == 1 ? mab_get_pointer_sniping_dpi() : mab_get_pointer_default_dpi();
     bool cpi_redraw = false;
     if (last_cpi != curr_cpi) {
         last_cpi   = curr_cpi;

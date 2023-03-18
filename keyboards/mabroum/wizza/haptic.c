@@ -24,9 +24,6 @@ bool mab_process_record_haptic(uint16_t keycode, keyrecord_t *record) {
         case A(KC_F4):
         case UNDO:
         case REDO:
-        case ACCELERATION_TOGGLE:
-        case DRAGSCROLL_MODE_TOGGLE:
-        case SNIPING_MODE_TOGGLE:
         case KC_AUDIO_VOL_UP:
         case KC_AUDIO_VOL_DOWN:
         case KC_BTN1:

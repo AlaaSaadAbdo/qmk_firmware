@@ -91,68 +91,6 @@ uint16_t mab_get_pointer_sniping_dpi(void) {
     return get_pointer_sniping_dpi(&g_mab_config);
 }
 
-bool mab_get_pointer_sniping_enabled(void) {
-    return g_mab_config.is_sniping_enabled;
-}
-
-void mab_set_pointer_sniping_enabled(bool enable) {
-    g_mab_config.is_sniping_enabled = enable;
-    maybe_update_pointing_device_cpi(&g_mab_config);
-}
-
-bool mab_get_pointer_dragscroll_enabled(void) {
-    return g_mab_config.is_dragscroll_enabled;
-}
-
-void mab_set_pointer_dragscroll_enabled(bool enable) {
-    g_mab_config.is_dragscroll_enabled = enable;
-    maybe_update_pointing_device_cpi(&g_mab_config);
-}
-
-bool mab_get_pointer_acceleration_enabled(void) {
-    return g_mab_config.is_acceleration_enabled;
-}
-
-void mab_set_pointer_acceleration_enabled(bool enable) {
-    g_mab_config.is_acceleration_enabled = enable;
-    maybe_update_pointing_device_cpi(&g_mab_config);
-}
-
-static void pointing_device_task_mab(report_mouse_t* mouse_report) {
-    static int16_t scroll_buffer_x = 0;
-    static int16_t scroll_buffer_y = 0;
-    if (g_mab_config.is_dragscroll_enabled) {
-        scroll_buffer_x += mouse_report->x;
-        scroll_buffer_y -= mouse_report->y;
-        mouse_report->x = 0;
-        mouse_report->y = 0;
-        if (abs(scroll_buffer_x) > MAB_DRAGSCROLL_BUFFER_SIZE) {
-            mouse_report->h = scroll_buffer_x > 0 ? 1 : -1;
-            scroll_buffer_x = 0;
-        }
-        if (abs(scroll_buffer_y) > MAB_DRAGSCROLL_BUFFER_SIZE) {
-            mouse_report->v = scroll_buffer_y > 0 ? 1 : -1;
-            scroll_buffer_y = 0;
-        }
-    }
-    if (g_mab_config.is_acceleration_enabled && !g_mab_config.is_dragscroll_enabled && !g_mab_config.is_sniping_enabled) {
-        mouse_xy_report_t x = mouse_report->x, y = mouse_report->y;
-        mouse_report->x = 0;
-        mouse_report->y = 0;
-
-        x = (mouse_xy_report_t)(x > 0 ? x * x / 16 + x : -x * x / 16 + x);
-        y = (mouse_xy_report_t)(y > 0 ? y * y / 16 + y : -y * y / 16 + y);
-        mouse_report->x = x;
-        mouse_report->y = y;
-    }
-}
-
-report_mouse_t pointing_device_task_kb(report_mouse_t mouse_report) {
-    pointing_device_task_mab(&mouse_report);
-    mouse_report = pointing_device_task_user(mouse_report);
-    return mouse_report;
-}
-
 void pointing_device_init_kb(void) {
     maybe_update_pointing_device_cpi(&g_mab_config);
     pointing_device_init_user();
@@ -254,11 +192,6 @@ bool mab_process_pointing_keys(uint16_t keycode, keyrecord_t *record) {
                 }
                 set_pointing_mode_device(1);
                 toggle_pointing_mode_id(5);
-            }
-            break;
-        case ACCELERATION_TOGGLE:
-            if (record->event.pressed) {
-                mab_set_pointer_acceleration_enabled(!mab_get_pointer_acceleration_enabled());
             }
             break;
         default:
