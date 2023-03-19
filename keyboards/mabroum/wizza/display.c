@@ -67,10 +67,13 @@ void set_cpi_text_value(lv_obj_t* lbl) {
     }
 }
 
-extern rgb_config_t rgb_matrix_config;
 
 //----------------------------------------------------------
 // RGB Matrix naming
+#ifdef RGB_MATRIX_ENABLE
+
+extern rgb_config_t rgb_matrix_config;
+
 #if defined(RGB_MATRIX_ENABLE)
 #    include <rgb_matrix.h>
 
@@ -112,6 +115,7 @@ const char *rgb_matrix_name(uint8_t effect) {
 }
 #endif // defined(RGB_MATRIX_ENABLE)
 
+
 void set_rgbmode_text_value(lv_obj_t* lbl) {
     char buf[32];
     if (!rgb_matrix_config.enable) {
@@ -142,6 +146,8 @@ void ui_render_rgbmode(lv_event_t * e) {
          set_rgbmode_text_value(ui_Screen1_Label_RGB);
     }
 }
+
+#endif /* ifdef RGB_MATRIX_ENABLE */
 
 void ui_render_altmod(lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);
@@ -294,6 +300,8 @@ void lvgl_event_triggers(void) {
     if (layer_state_redraw) {
         lv_event_send(ui_Layer_Indicator, USER_EVENT_ACTIVE_LAYER_CHANGE, NULL);
     }
+
+#ifdef RGB_MATRIX_ENABLE
     bool            rgb_effect_redraw = false;
     static uint16_t last_effect       = 0xFFFF;
     uint8_t         curr_effect       = rgb_matrix_config.mode;
@@ -310,6 +318,7 @@ void lvgl_event_triggers(void) {
     if (rgb_effect_redraw) {
         lv_event_send(ui_Screen1_Label_RGB, USER_EVENT_RGBMODE_UPDATE, NULL);
     }
+#endif /* ifdef RGB_MATRIX_ENABLE */
 
     bool altmod_state_redraw = false;
     static uint32_t last_altmod_state   = 0;
@@ -385,6 +394,7 @@ void ui_Screen1_screen_init(void) {
     lv_obj_set_style_text_align(ui_Screen1_Label_POINTING_MODE, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_add_event_cb(ui_Screen1_Label_POINTING_MODE, ui_render_pointing_mode, USER_EVENT_POINTING_MODE_UPDATE, NULL);
 
+#ifdef RGB_MATRIX_ENABLE
     ui_Screen1_Label_RGB = lv_label_create(ui_Screen1);
     lv_obj_set_width(ui_Screen1_Label_RGB, 150);
     lv_obj_set_style_text_font(ui_Screen1_Label_RGB, &rb_18, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -392,6 +402,7 @@ void ui_Screen1_screen_init(void) {
     lv_obj_set_y(ui_Screen1_Label_RGB, 105);
     lv_label_set_text(ui_Screen1_Label_RGB, "RGB");
     lv_obj_add_event_cb(ui_Screen1_Label_RGB, ui_render_rgbmode, USER_EVENT_RGBMODE_UPDATE, NULL);
+#endif /* ifdef RGB_MATRIX_ENABLE */
 
     ui_Screen1_layout = lv_label_create(ui_Screen1);
     lv_obj_set_width(ui_Screen1_layout , 100);

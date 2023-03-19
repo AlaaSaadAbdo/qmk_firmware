@@ -37,8 +37,6 @@
 #define SPI_MOSI_PIN GP23
 #define SPI_MISO_PIN GP20
 
-
-
 #define PMW33XX_CS_PIN GP21
 #define PMW33XX_CPI 800
 #define PMW33XX_CS_DIVISOR 8 // needs to be the same as the SHIFTREG_DIVISOR above
@@ -75,10 +73,27 @@
 #define DRV_GREETING  alert_750ms
 
 
+#ifdef RGBLIGHT_ENABLE
+
+#define RGB_DI_PIN GP27
+#define RGBLED_NUM 20
+#define RGBLED_SPLIT { 10, 10 }
+
+#define RGBLIGHT_SPLIT
+#define RGBLIGHT_DEFAULT_HUE 180
+#define RGBLIGHT_DEFAULT_SAT 255
+#define RGBLIGHT_DEFAULT_VAL 75
+
+#endif // RGBLIGHT_ENABLE
+
+#ifdef RGB_MATRIX_ENABLE
+
 #define RGB_DI_PIN GP25
 
 // #define DRIVER_LED_TOTAL 30
 #define RGB_MATRIX_LED_COUNT 30
 #define RGB_MATRIX_SPLIT { 15, 15 }
+
+#endif /* ifndef RGB_MATRIX_ENABLE */
 
 #define SPLIT_HAPTIC_ENABLE

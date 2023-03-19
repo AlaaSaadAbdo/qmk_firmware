@@ -13,7 +13,8 @@
         "mousekey": true,
         "nkro": true,
         "quantum_painter": true,
-        "rgb_matrix": true,
+        "rgb_matrix": false,
+        "rgblight": true,
         "haptic": true,
     },
     "bootmagic": {
