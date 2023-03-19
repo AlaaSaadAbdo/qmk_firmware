@@ -1,6 +1,7 @@
 #include "quantum.h"
 #include "wizza.h"
 #include "display.h"
+#include "rgblight.h"
 
 #ifdef RGB_MATRIX_ENABLE
 
@@ -82,22 +83,21 @@ void keyboard_post_init_user(void) {
   set_pointing_mode_device(1);
   set_pointing_mode_id(2);
 
+  backlight_level_noeeprom(3);
 }
 
 void housekeeping_task_user(void) {
   /* kb_state_update(); */
-  /* if (kb_state.lcd_power) { */
-  /*     backlight_level_noeeprom(3); */
-  /*     rgb_matrix_enable_noeeprom(); */
-  /*   } else { */
-  /*     backlight_level_noeeprom(0); */
-  /*     rgb_matrix_disable_noeeprom(); */
-  /*   } */
   /* static bool lcd_on = false; */
   /* if (lcd_on != (bool)kb_state.lcd_power) { */
   /*     lcd_on = (bool)kb_state.lcd_power; */
   /*     qp_power(display, lcd_on); */
   /* } */
+  /* if (kb_state.lcd_power) { */
+  /*     backlight_level_noeeprom(3); */
+  /*   } else { */
+  /*     backlight_level_noeeprom(0); */
+  /*   } */
   lvgl_event_triggers();
 }
 

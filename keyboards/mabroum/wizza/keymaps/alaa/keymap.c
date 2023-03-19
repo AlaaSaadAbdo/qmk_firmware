@@ -61,8 +61,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                     MO_NAV, KC_SPACE,       OSM(MOD_LSFT), MO_SYM,
                                     KC_BTN3, KC_BTN2, KC_BTN1, KC_BTN1, KC_BTN2, KC_BTN3,
                                     // click  , left        , up       , right       , down
-                                    PMR_SNIPE , PMR_DRAG,   PMR_CARET, PMR_VOLUME,   KC_NO,
-                                    PML_SNIPE , PML_VOLUME, PML_CARET, PML_DRAG,     KC_NO
+                                    PMR_SNIPE , PMR_DRAG,   PMR_CARET, PMR_VOLUME,   QK_BACKLIGHT_TOGGLE,
+                                    PML_SNIPE , PML_VOLUME, PML_CARET, PML_DRAG,     QK_BACKLIGHT_STEP
 
     ),
     [APT] = LAYOUT_23332(
