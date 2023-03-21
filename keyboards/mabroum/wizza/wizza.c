@@ -76,14 +76,6 @@ void keyboard_post_init_user(void) {
     wait_ms(50);
     display_init();
   }
-
-  // set default pointing modes
-  set_pointing_mode_device(0);
-  set_pointing_mode_id(0);
-  set_pointing_mode_device(1);
-  set_pointing_mode_id(2);
-
-  backlight_level_noeeprom(3);
 }
 
 void housekeeping_task_user(void) {

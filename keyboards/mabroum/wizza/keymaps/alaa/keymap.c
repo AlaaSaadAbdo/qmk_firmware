@@ -178,7 +178,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case MO_NAV:
             if (record->event.pressed) {
                 set_pointing_mode_device(0);
-                set_pointing_mode_id(3);
+                set_pointing_mode_id(1);
             } else {
                 set_pointing_mode_device(0);
                 set_pointing_mode_id(0);
@@ -187,7 +187,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case MO_SYM:
             if (record->event.pressed) {
                 set_pointing_mode_device(1);
-                set_pointing_mode_id(1);
+                set_pointing_mode_id(3);
             } else {
                 set_pointing_mode_device(1);
                 set_pointing_mode_id(2);
