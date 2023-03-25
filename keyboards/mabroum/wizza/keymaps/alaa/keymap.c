@@ -76,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                     PML_SNIPE , PML_VOLUME, PML_CARET, PML_DRAG,     KC_NO
     ),
     [NAV] = LAYOUT_23332(
-        SCRNSHT,   KC_ENT, KC_BSPC, KC_TAB,  KC_DEL,            DWRD,    KC_NO,     KC_UP,    QUIT,       WRKFLW1,
+        SCRNSHT,   KC_ENT, KC_BSPC, KC_TAB,  KC_DEL,            DWRD,    KC_F2,     KC_UP,    QUIT,       WRKFLW1,
         OS_LCTL,   OS_LALT, OS_LGUI,  OS_LSFT, SALL,            KC_DOT,  KC_LEFT,   KC_DOWN,  KC_RIGHT,   WRKFLW2,
                    CUT,    COPY,     PASTE,                                 KC_ENT,    KC_BSPC,  KC_TAB,
                                           KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
