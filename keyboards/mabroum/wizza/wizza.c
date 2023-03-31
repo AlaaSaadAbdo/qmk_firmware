@@ -78,6 +78,9 @@ void keyboard_post_init_user(void) {
     wait_ms(50);
     display_init();
   }
+
+  pointing_device_set_cpi_on_side(true, 800); //Set cpi on left side to a low value for slower scrolling.
+  pointing_device_set_cpi_on_side(false, 800); //Set cpi on right side to a reasonable value for mousing.
 }
 
 void housekeeping_task_user(void) {
