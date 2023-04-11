@@ -39,6 +39,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #    include "pointing_device.h"
 #endif
 
+#if defined(ENCODER_ENABLE) && defined(ENCODER_MAP_ENABLE) && defined(SWAP_HANDS_ENABLE)
+#    include "encoder.h"
+#endif
+
 int tp_buttons;
 
 #if defined(RETRO_TAPPING) || defined(RETRO_TAPPING_PER_KEY) || (defined(AUTO_SHIFT_ENABLE) && defined(RETRO_SHIFT))
@@ -159,6 +163,18 @@ void set_swap_hands_state(size_t index, uint8_t *swap_state, bool on) {
     } else {
         swap_state[array_index] &= ~bit_val;
     }
+}
+
+void swap_hands_on(void) {
+    swap_hands = true;
+}
+
+void swap_hands_off(void) {
+    swap_hands = false;
+}
+
+void swap_hands_toggle(void) {
+    swap_hands = !swap_hands;
 }
 
 bool is_swap_hands_on(void) {
@@ -435,39 +451,32 @@ void process_action(keyrecord_t *record, action_t action) {
                     } else {
                         if (event.pressed) {
                             if (tap_count == 0) {
+                                // Not a tap, but a hold: register the held mod
                                 ac_dprintf("MODS_TAP: Oneshot: 0\n");
-                                register_mods(mods | get_oneshot_mods());
+                                register_mods(mods);
                             } else if (tap_count == 1) {
                                 ac_dprintf("MODS_TAP: Oneshot: start\n");
-                                set_oneshot_mods(mods | get_oneshot_mods());
+                                add_oneshot_mods(mods);
 #        if defined(ONESHOT_TAP_TOGGLE) && ONESHOT_TAP_TOGGLE > 1
                             } else if (tap_count == ONESHOT_TAP_TOGGLE) {
                                 ac_dprintf("MODS_TAP: Toggling oneshot");
                                 register_mods(mods);
-                                clear_oneshot_mods();
-                                set_oneshot_locked_mods(mods | get_oneshot_locked_mods());
+                                del_oneshot_mods(mods);
+                                add_oneshot_locked_mods(mods);
 #        endif
-                            } else {
-                                register_mods(mods | get_oneshot_mods());
                             }
                         } else {
                             if (tap_count == 0) {
-                                clear_oneshot_mods();
+                                // Release hold: unregister the held mod and its variants
                                 unregister_mods(mods);
-                            } else if (tap_count == 1) {
-                                // Retain Oneshot mods
+                                del_oneshot_mods(mods);
+                                del_oneshot_locked_mods(mods);
 #        if defined(ONESHOT_TAP_TOGGLE) && ONESHOT_TAP_TOGGLE > 1
-                                if (mods & get_mods()) {
-                                    unregister_mods(mods);
-                                    clear_oneshot_mods();
-                                    set_oneshot_locked_mods(~mods & get_oneshot_locked_mods());
-                                }
-                            } else if (tap_count == ONESHOT_TAP_TOGGLE) {
-                                // Toggle Oneshot Layer
-#        endif
-                            } else {
+                            } else if (tap_count == 1 && (mods & get_mods())) {
                                 unregister_mods(mods);
-                                clear_oneshot_mods();
+                                del_oneshot_mods(mods);
+                                del_oneshot_locked_mods(mods);
+#        endif
                             }
                         }
                     }
@@ -487,7 +496,7 @@ void process_action(keyrecord_t *record, action_t action) {
                 default:
                     if (event.pressed) {
                         if (tap_count > 0) {
-#    if !defined(IGNORE_MOD_TAP_INTERRUPT) || defined(HOLD_ON_OTHER_KEY_PRESS_PER_KEY)
+#    ifdef HOLD_ON_OTHER_KEY_PRESS_PER_KEY
                             if (
 #        ifdef HOLD_ON_OTHER_KEY_PRESS_PER_KEY
                                 get_hold_on_other_key_press(get_event_keycode(record->event, false), record) &&
