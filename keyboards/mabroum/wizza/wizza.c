@@ -42,15 +42,13 @@ kb_runtime_config kb_state;
 
 static painter_device_t display;
 
-/* void kb_state_update(void) { */
-/* #ifdef BACKLIGHT_ENABLE */
-/*     if (is_keyboard_master()) { */
-/*         // Modify allowed current limits */
-/*         // Turn off the LCD if there's been no matrix activity */
-/*         kb_state.lcd_power = (last_input_activity_elapsed() < 30000) ? 1 : 0; */
-/*     } */
-/* #endif [> ifdef BACKLIGHT_ENABLE <] */
-/* } */
+void kb_state_update(void) {
+    /* if (is_keyboard_master()) { */
+        // Modify allowed current limits
+        // Turn off the LCD if there's been no matrix activity
+        kb_state.lcd_power = (last_input_activity_elapsed() < 30000) ? 1 : 0;
+    /* } */
+}
 
 void keyboard_post_init_user(void) {
   /* debug_enable=true; */
@@ -84,7 +82,16 @@ void keyboard_post_init_user(void) {
 }
 
 void housekeeping_task_user(void) {
-  /* #ifdef BACKLIGHT_ENABLE */
+  #ifdef BACKLIGHT_ENABLE
+    bool peripherals_on = last_input_activity_elapsed() < 30000;
+    if (peripherals_on) {
+        backlight_enable();
+        /* rgb_matrix_enable_noeeprom(); */
+        lvgl_event_triggers();
+    } else {
+        backlight_disable();
+        /* rgb_matrix_disable_noeeprom(); */
+    }
   /* kb_state_update(); */
   /* static bool lcd_on = false; */
   /* if (lcd_on != (bool)kb_state.lcd_power) { */
@@ -96,8 +103,8 @@ void housekeeping_task_user(void) {
   /*   } else { */
   /*     backlight_level_noeeprom(0); */
   /*   } */
-  /* #endif [> ifdef BACKLIGHT_ <] */
-  lvgl_event_triggers();
+  #endif // ifdef BACKLIGHT_ENABLE
+  /* lvgl_event_triggers(); */
 }
 
 void board_init(void) {}
