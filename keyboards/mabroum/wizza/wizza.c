@@ -48,8 +48,6 @@ void keyboard_post_init_user(void) {
   /* debug_keyboard=false; */
   /* debug_mouse=true; */
 
-  setPinOutput(GP11);
-  writePinHigh(GP11);
   if (is_keyboard_left()) {
     display = qp_st7789_make_spi_device(200, 320, DISPLAY_CS_PIN, DISPLAY_DC_PIN, DISPLAY_RST_PIN, 8, 3);
     qp_set_viewport_offsets(display, 0, 34);
