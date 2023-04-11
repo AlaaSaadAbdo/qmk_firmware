@@ -60,6 +60,6 @@
 #define F_LRA 150 // resonance freq
 #define DRV_GREETING  alert_750ms
 
-#define RGB_DI_PIN GP27
+#define WS2812_DI_PIN GP27
 #define DRIVER_LED_TOTAL 34
 #define RGB_MATRIX_LED_COUNT 34
