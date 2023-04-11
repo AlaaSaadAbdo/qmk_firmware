@@ -42,22 +42,14 @@ kb_runtime_config kb_state;
 
 static painter_device_t display;
 
-void kb_state_update(void) {
-    /* if (is_keyboard_master()) { */
-        // Modify allowed current limits
-        // Turn off the LCD if there's been no matrix activity
-        kb_state.lcd_power = (last_input_activity_elapsed() < 30000) ? 1 : 0;
-    /* } */
-}
-
 void keyboard_post_init_user(void) {
   /* debug_enable=true; */
   /* debug_matrix=false; */
   /* debug_keyboard=false; */
   /* debug_mouse=true; */
 
-  /* setPinOutput(LCD_POWER_ENABLE_PIN); */
-  /* writePinHigh(LCD_POWER_ENABLE_PIN); */
+  setPinOutput(GP11);
+  writePinHigh(GP11);
   if (is_keyboard_left()) {
     display = qp_st7789_make_spi_device(200, 320, DISPLAY_CS_PIN, DISPLAY_DC_PIN, DISPLAY_RST_PIN, 8, 3);
     qp_set_viewport_offsets(display, 0, 34);
@@ -87,24 +79,12 @@ void housekeeping_task_user(void) {
     if (peripherals_on) {
         backlight_enable();
         /* rgb_matrix_enable_noeeprom(); */
-        lvgl_event_triggers();
     } else {
         backlight_disable();
         /* rgb_matrix_disable_noeeprom(); */
     }
-  /* kb_state_update(); */
-  /* static bool lcd_on = false; */
-  /* if (lcd_on != (bool)kb_state.lcd_power) { */
-  /*     lcd_on = (bool)kb_state.lcd_power; */
-  /*     qp_power(display, lcd_on); */
-  /* } */
-  /* if (kb_state.lcd_power) { */
-  /*     backlight_level_noeeprom(3); */
-  /*   } else { */
-  /*     backlight_level_noeeprom(0); */
-  /*   } */
   #endif // ifdef BACKLIGHT_ENABLE
-  /* lvgl_event_triggers(); */
+  lvgl_event_triggers();
 }
 
 void board_init(void) {}

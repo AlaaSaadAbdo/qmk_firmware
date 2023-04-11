@@ -16,7 +16,7 @@
         "rgb_matrix": false,
         "rgblight": true,
         "haptic": true,
-        "backlight": true,
+        "backlight": false,
     },
     "bootmagic": {
         "matrix": [0, 0]
