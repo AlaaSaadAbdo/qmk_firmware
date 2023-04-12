@@ -1,7 +1,10 @@
 #include "quantum.h"
 #include "wizza.h"
 #include "display.h"
+
+#ifdef RGBLIGHT_ENABLE
 #include "rgblight.h"
+#endif // ifdef RGBLIGHT_ENABLE
 
 #ifdef RGB_MATRIX_ENABLE
 
@@ -9,25 +12,37 @@ led_config_t g_led_config = { {
     {     4,     3,     2,     1,      0 },
     {     5,     6,     7,     8,      9 },
     {     13,    12,    11,    10,     14 },
-    { NO_LED, NO_LED, NO_LED, NO_LED, NO_LED },
-    { NO_LED, NO_LED, NO_LED, NO_LED, NO_LED },
+    {     19,    18,    17,    16,     15 },
+    {     20,    21,    22,    23,     24 },
 
-    {     15,   16,    17,    18,      19 },
-    {     24,   23,    22,    21,      20 },
-    {     29,    25,    26,   27,      28 },
-    { NO_LED, NO_LED, NO_LED, NO_LED, NO_LED },
-    { NO_LED, NO_LED, NO_LED, NO_LED, NO_LED }
+    {     25,   26,    27,    28,      29 },
+    {     34,   33,    32,    31,      30 },
+    {     39,   35,    36,    37,      38 },
+    {     40,   41,    42,    43,      44 },
+    {     49,   48,    47,    46,      45 }
 
 }, {
     {2,1},{25,0},{48,2},{63,10},{77,20},{72,31},{56,21},{40,13},{18,10},{0,12},{15,22},{32,24},{38,31},
     {51,44},{58,53},
+
+    {0,0},{0,0},{0,0},{0,0},{0,0},
+    {0,0},{0,0},{0,0},{0,0},{0,0},
+
+    {0,0},{0,0},{0,0},{0,0},{0,0},
+    {0,0},{0,0},{0,0},{0,0},{0,0},
+
     {164,53},{180,44},
     {185,31},{200,24},{217,22},{224,12},{204,10},{185,13},{169,21},{155,31},{160,20},{174,10},{189,2},{212,0},{237,1}
 }, {
     4, 4, 4, 4, 4,
     4, 4, 4, 4, 4,
     4, 4, 4,
-    1, 1, 1, 1,
+    1, 1,
+
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+
+    1, 1,
     4, 4, 4, 4, 4,
     4, 4, 4, 4, 4,
     4, 4, 4,
@@ -76,13 +91,13 @@ void housekeeping_task_user(void) {
     bool peripherals_on = last_input_activity_elapsed() < 300000;
     if (peripherals_on) {
         backlight_enable();
-        /* rgb_matrix_enable_noeeprom(); */
+        lvgl_event_triggers();
+        rgb_matrix_enable_noeeprom();
     } else {
         backlight_disable();
-        /* rgb_matrix_disable_noeeprom(); */
+        rgb_matrix_disable_noeeprom();
     }
   #endif // ifdef BACKLIGHT_ENABLE
-  lvgl_event_triggers();
 }
 
 void board_init(void) {}

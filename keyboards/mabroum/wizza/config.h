@@ -86,9 +86,9 @@
 
 #ifdef RGBLIGHT_ENABLE
 
-#define WS2812_DI_PIN GP27
-#define RGBLED_NUM 20
-#define RGBLED_SPLIT { 10, 10 }
+#define WS2812_DI_PIN GP25
+#define RGBLED_NUM 50
+#define RGBLED_SPLIT { 25, 25 }
 
 #define RGBLIGHT_SPLIT
 #define RGBLIGHT_DEFAULT_HUE 180
@@ -104,8 +104,8 @@
 #define WS2812_DI_PIN GP25
 
 // #define DRIVER_LED_TOTAL 30
-#define RGB_MATRIX_LED_COUNT 30
-#define RGB_MATRIX_SPLIT { 15, 15 }
+#define RGB_MATRIX_LED_COUNT 50
+#define RGB_MATRIX_SPLIT { 25, 25 }
 
 #endif /* ifndef RGB_MATRIX_ENABLE */
 
