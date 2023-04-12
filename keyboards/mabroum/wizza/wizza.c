@@ -92,10 +92,8 @@ void housekeeping_task_user(void) {
     if (peripherals_on) {
         backlight_enable();
         lvgl_event_triggers();
-        rgb_matrix_enable_noeeprom();
     } else {
         backlight_disable();
-        rgb_matrix_disable_noeeprom();
     }
   #endif // ifdef BACKLIGHT_ENABLE
 }

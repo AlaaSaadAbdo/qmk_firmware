@@ -61,8 +61,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                     MO_NAV, KC_SPACE,       OSM(MOD_LSFT), MO_SYM,
                                     KC_BTN3, KC_BTN2, KC_BTN1, KC_BTN1, KC_BTN2, KC_BTN3,
                                     // click  , left        , up       , right       , down
-                                    PMR_SNIPE , PMR_DRAG,   PMR_CARET, PMR_VOLUME,   QK_BACKLIGHT_TOGGLE,
-                                    PML_SNIPE , PML_VOLUME, PML_CARET, PML_DRAG,     QK_BACKLIGHT_STEP
+                                    PMR_SNIPE , PMR_DRAG,   PMR_CARET, PMR_VOLUME,   KC_NO,
+                                    PML_SNIPE , PML_VOLUME, PML_CARET, PML_DRAG,     KC_NO
 
     ),
     [APT] = LAYOUT_23332(
@@ -91,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                     KC_6,   KC_5,   KC_4,                                 KC_QUES, KC_EXLM, KC_SLSH,
                                           KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                           KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS, KC_TRNS,
-                                          RGB_TOG, RGB_VAI, RGB_RMOD, RGB_VAD, RGB_MOD,
+                                          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,KC_TRNS,
                                           RGB_TOG, RGB_VAI, RGB_RMOD, RGB_VAD, RGB_MOD
     ),
 };
