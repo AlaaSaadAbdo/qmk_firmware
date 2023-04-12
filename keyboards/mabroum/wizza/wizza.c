@@ -73,7 +73,7 @@ void keyboard_post_init_user(void) {
 
 void housekeeping_task_user(void) {
   #ifdef BACKLIGHT_ENABLE
-    bool peripherals_on = last_input_activity_elapsed() < 30000;
+    bool peripherals_on = last_input_activity_elapsed() < 300000;
     if (peripherals_on) {
         backlight_enable();
         /* rgb_matrix_enable_noeeprom(); */
