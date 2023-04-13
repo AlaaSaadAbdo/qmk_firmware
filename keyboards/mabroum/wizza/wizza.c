@@ -88,12 +88,11 @@ void keyboard_post_init_user(void) {
 
 void housekeeping_task_user(void) {
   #ifdef BACKLIGHT_ENABLE
-    bool peripherals_on = last_input_activity_elapsed() < 300000;
-    if (peripherals_on) {
+    if (rgb_matrix_get_suspend_state()) {
+        backlight_disable();
+    } else {
         backlight_enable();
         lvgl_event_triggers();
-    } else {
-        backlight_disable();
     }
   #endif // ifdef BACKLIGHT_ENABLE
 }
