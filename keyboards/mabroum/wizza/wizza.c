@@ -77,6 +77,7 @@ void keyboard_post_init_user(void) {
     qp_rect(display, 0, 0, 319, 171, 0, 0, 0, true);
   }
 
+  backlight_level_noeeprom(1);
   if (qp_lvgl_attach(display)) {     // Attach LVGL to the display
     wait_ms(50);
     display_init();
