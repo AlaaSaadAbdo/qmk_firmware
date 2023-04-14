@@ -70,19 +70,6 @@ void keyboard_post_init_user(void) {
 }
 
 void housekeeping_task_user(void) {
-  /* kb_state_update(); */
-  /* if (kb_state.lcd_power) { */
-  /*     backlight_level_noeeprom(3); */
-  /*     rgb_matrix_enable_noeeprom(); */
-  /*   } else { */
-  /*     backlight_level_noeeprom(0); */
-  /*     rgb_matrix_disable_noeeprom(); */
-  /*   } */
-  /* static bool lcd_on = false; */
-  /* if (lcd_on != (bool)kb_state.lcd_power) { */
-  /*     lcd_on = (bool)kb_state.lcd_power; */
-  /*     qp_power(display, lcd_on); */
-  /* } */
   lvgl_event_triggers();
 }
 

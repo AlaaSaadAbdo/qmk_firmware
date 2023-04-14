@@ -61,6 +61,13 @@
 #define F_LRA 150 // resonance freq
 #define DRV_GREETING  alert_750ms
 
+#ifdef BACKLIGHT_ENABLE
+#define BACKLIGHT_PWM_DRIVER PWMD5
+#define BACKLIGHT_PWM_CHANNEL 1
+#define BACKLIGHT_PIN GP26
+#define BACKLIGHT_LEVELS 1
+#define BACKLIGHT_ON_STATE 1
+#endif //BACKLIGHT_ENABLE
 
 #ifdef RGB_MATRIX_ENABLE
 

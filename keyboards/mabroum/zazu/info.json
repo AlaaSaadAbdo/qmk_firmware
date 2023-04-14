@@ -14,7 +14,8 @@
         "quantum_painter": true,
         "rgb_matrix": true,
         "wpm": true,
-        "haptic": true
+        "haptic": true,
+        "backlight": true
     },
     "processor": "RP2040",
     "url": "",
