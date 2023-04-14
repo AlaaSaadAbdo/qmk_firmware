@@ -87,15 +87,20 @@ void keyboard_post_init_user(void) {
   pointing_device_set_cpi_on_side(false, 800); //Set cpi on right side to a reasonable value for mousing.
 }
 
-void housekeeping_task_user(void) {
+void suspend_power_down_user(void) {
   #ifdef BACKLIGHT_ENABLE
-    if (rgb_matrix_get_suspend_state()) {
-        backlight_disable();
-    } else {
-        backlight_enable();
-        lvgl_event_triggers();
-    }
+    backlight_level_noeeprom(0);
   #endif // ifdef BACKLIGHT_ENABLE
+}
+
+void suspend_wakeup_init_user(void) {
+  #ifdef BACKLIGHT_ENABLE
+    backlight_level_noeeprom(1);
+  #endif // ifdef BACKLIGHT_ENABLE
+}
+
+void housekeeping_task_user(void) {
+    lvgl_event_triggers();
 }
 
 void board_init(void) {}
