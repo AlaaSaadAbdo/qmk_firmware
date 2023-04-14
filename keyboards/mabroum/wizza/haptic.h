@@ -18,3 +18,5 @@
 #include QMK_KEYBOARD_H
 
 bool mab_process_record_haptic(uint16_t keycode, keyrecord_t *record);
+
+void haptic_play_user(uint8_t eff);

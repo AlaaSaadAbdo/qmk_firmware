@@ -45,7 +45,7 @@ bool mab_process_record_haptic(uint16_t keycode, keyrecord_t *record) {
         case PMR_VOLUME:
         case CW_TOGG:
             if (record->event.pressed) {
-                DRV_pulse(medium_click1);
+                haptic_play_user(medium_click1);
             }
             break;
         case DF(0):
@@ -57,27 +57,27 @@ bool mab_process_record_haptic(uint16_t keycode, keyrecord_t *record) {
         case EE_CLR:
         case QK_BOOT:
             if (record->event.pressed) {
-                DRV_pulse(strong_click1);
+                haptic_play_user(strong_click1);
             }
             break;
         case KC_ESC:
             if (record->event.pressed) {
-                /* DRV_pulse(sharp_tick1); */
-                DRV_pulse(medium_click1);
+                haptic_play_user(medium_click1);
+                /* DRV_pulse(medium_click1); */
             }
             break;
         case KC_BTN2:
             if (record->event.pressed) {
-                DRV_pulse(sh_dblclick_str);
+                haptic_play_user(sh_dblclick_str);
             }
             break;
         case KC_S: // save
             if (record->event.pressed) {
                 if ((get_mods() & MOD_MASK_GUI) || (get_oneshot_mods() & MOD_MASK_GUI)) {
-                    DRV_pulse(medium_click1);
+                    haptic_play_user(medium_click1);
                 }
                 if ((get_mods() & MOD_MASK_CTRL) || (get_oneshot_mods() & MOD_MASK_CTRL)) {
-                    DRV_pulse(medium_click1);
+                    haptic_play_user(medium_click1);
                 }
             }
             break;
@@ -92,6 +92,18 @@ bool mab_process_record_haptic(uint16_t keycode, keyrecord_t *record) {
     }
 
     return true;
+}
+
+
+extern uint8_t split_haptic_play;
+haptic_config_t haptic_config;
+
+void haptic_play_user(uint8_t eff) {
+    haptic_config.mode = eff;
+    DRV_pulse(eff);
+#    if defined(SPLIT_KEYBOARD) && defined(SPLIT_HAPTIC_ENABLE)
+    split_haptic_play = haptic_config.mode;
+#    endif
 }
 
 __attribute__((weak)) bool get_haptic_enabled_key_user(uint16_t keycode, keyrecord_t *record) { return false; }
