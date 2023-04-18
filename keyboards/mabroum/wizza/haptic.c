@@ -83,12 +83,6 @@ bool mab_process_record_haptic(uint16_t keycode, keyrecord_t *record) {
         case KC_AUDIO_VOL_DOWN:
                 haptic_play_user(sharp_tick1);
             break;
-        /* case MO(2): */
-        /* case MO(3): */
-        /*     if (record->event.pressed) { */
-        /*         DRV_pulse(soft_bump); */
-        /*     } */
-        /*     break; */
         default:
             break;
     }
