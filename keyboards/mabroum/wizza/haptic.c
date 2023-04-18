@@ -24,8 +24,6 @@ bool mab_process_record_haptic(uint16_t keycode, keyrecord_t *record) {
         case A(KC_F4):
         case UNDO:
         case REDO:
-        case KC_AUDIO_VOL_UP:
-        case KC_AUDIO_VOL_DOWN:
         case KC_BTN1:
         case KC_BTN3:
         case C(KC_V):
@@ -80,6 +78,10 @@ bool mab_process_record_haptic(uint16_t keycode, keyrecord_t *record) {
                     haptic_play_user(medium_click1);
                 }
             }
+            break;
+        case KC_AUDIO_VOL_UP:
+        case KC_AUDIO_VOL_DOWN:
+                haptic_play_user(sharp_tick1);
             break;
         /* case MO(2): */
         /* case MO(3): */
