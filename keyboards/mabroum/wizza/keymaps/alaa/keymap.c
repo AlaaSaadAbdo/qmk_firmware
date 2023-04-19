@@ -319,7 +319,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 }
 
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
-    [HDN]  =  { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [HDN]  =  { ENCODER_CCW_CW(S(SW_WIN), SW_WIN), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [APT]  =  { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [NAV]  =  { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [SYM]  =  { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
