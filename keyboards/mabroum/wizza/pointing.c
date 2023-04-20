@@ -203,7 +203,7 @@ bool mab_process_pointing_keys(uint16_t keycode, keyrecord_t *record) {
 
 void mab_set_pointer() {
   if (keymap_config.swap_lctl_lgui) {
-    g_mab_config.pointer_default_dpi  = 2;
+    g_mab_config.pointer_default_dpi  = 1;
     maybe_update_pointing_device_cpi(&g_mab_config);
   } else {
     g_mab_config.pointer_default_dpi  = 0;
