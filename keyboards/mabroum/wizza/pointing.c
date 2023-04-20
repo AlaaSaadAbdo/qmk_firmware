@@ -12,7 +12,7 @@
 #define MAB_DRAGSCROLL_DPI 100
 #define MAB_DRAGSCROLL_BUFFER_SIZE 6
 #define MAB_DEFAULT_DPI_CONFIG_STEP 100
-#define MAB_DEFAULT_DPI 400
+#define MAB_DEFAULT_DPI 500
 #define MAB_MINIMUM_SNIPING_DPI 100
 
 typedef union {
@@ -206,7 +206,7 @@ void mab_set_pointer() {
     g_mab_config.pointer_default_dpi  = 2;
     maybe_update_pointing_device_cpi(&g_mab_config);
   } else {
-    g_mab_config.pointer_default_dpi  = 1;
+    g_mab_config.pointer_default_dpi  = 0;
     maybe_update_pointing_device_cpi(&g_mab_config);
   }
 }
