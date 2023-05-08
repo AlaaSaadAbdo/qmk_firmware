@@ -165,12 +165,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     if (keymap_config.swap_lctl_lgui) {
             update_swapper(
-                &sw_win_active, KC_LGUI, KC_TAB, SW_WIN,
+                &sw_win_active, false, KC_LGUI, KC_TAB, SW_WIN,
                 keycode, record
             );
     } else {
             update_swapper(
-                &sw_win_active, KC_LALT, KC_TAB, SW_WIN,
+                &sw_win_active, false, KC_LALT, KC_TAB, SW_WIN,
                 keycode, record
             );
     }
@@ -319,7 +319,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 }
 
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
-    [HDN]  =  { ENCODER_CCW_CW(S(SW_WIN), SW_WIN), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [HDN]  =  { ENCODER_CCW_CW(SW_WIN, SW_WIN_REVERSE), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [APT]  =  { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [NAV]  =  { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [SYM]  =  { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },

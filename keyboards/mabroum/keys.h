@@ -19,6 +19,7 @@ enum keycodes {
     REDO,
     REPEAT,
     SW_WIN,
+    SW_WIN_REVERSE,
     SW_CG,
     COPY,
     CUT,
