@@ -40,7 +40,7 @@ void keyboard_post_init_user(void) {
 
   display = qp_st7789_make_spi_device(200, 320, LCD_CS_PIN, LCD_DC_PIN, LCD_RST_PIN, 8, 3);
   qp_set_viewport_offsets(display, 0, 34);
-  qp_init(display, QP_ROTATION_90); // Initialise the display
+  qp_init(display, QP_ROTATION_270); // Initialise the display
   qp_power(display, true);
   qp_rect(display, 0, 0, 319, 171, 0, 0, 0, true);
 
