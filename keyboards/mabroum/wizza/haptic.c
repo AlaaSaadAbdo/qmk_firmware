@@ -81,6 +81,8 @@ bool mab_process_record_haptic(uint16_t keycode, keyrecord_t *record) {
             break;
         case KC_AUDIO_VOL_UP:
         case KC_AUDIO_VOL_DOWN:
+        case SW_WIN:
+        case SW_WIN_REVERSE:
                 haptic_play_user(sharp_tick1);
             break;
         default:
