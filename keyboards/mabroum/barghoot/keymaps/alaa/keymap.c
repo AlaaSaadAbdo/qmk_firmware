@@ -75,14 +75,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         SCRNSHT,  KC_ENT,  KC_BSPC,  KC_TAB,  KC_DEL,            DWRD,    KC_NO,     KC_UP,    QUIT,     WRKFLW1,
         OS_LCTL,  OS_LALT, OS_LGUI,  OS_LSFT, SALL,              KC_DOT,  KC_LEFT,   KC_DOWN,  KC_RIGHT, WRKFLW2,
         KC_6,  CUT,     COPY,      PASTE,     SALL,              KC_0,    KC_ENT,    KC_BSPC,  KC_TAB,   KC_6,
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+     RGB_MOD, RGB_RMOD, KC_TRNS, KC_TRNS, KC_TRNS,               KC_TRNS, KC_TRNS,   KC_TRNS,  RGB_RMOD, RGB_MOD,
                           KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
     ),
     [SYM] = LAYOUT_4x5_3(
         KC_9,   KC_9,   KC_8,   KC_7,   KC_EQUAL,           KC_COMMA, KC_SCLN, KC_COLN, KC_BSLS,  KC_GRAVE,
-        KC_3,   KC_2,   KC_1,   KC_0,   KC_MINUS,           KC_DOT,   OS_LSFT, OS_LGUI,  OS_RALT, OS_LCTL,
+        KC_3,   KC_2,   KC_1,   KC_0,   KC_MINUS,           KC_DOT,   OS_LSFT, OS_LGUI, OS_RALT,  OS_LCTL,
         KC_6,   KC_6,   KC_5,   KC_4,   KC_0,               KC_0,     KC_QUES, KC_EXLM, KC_SLSH,  KC_6,
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+     RGB_VAI, RGB_SAI, RGB_HUI, KC_TRNS, KC_TRNS,           KC_TRNS, KC_TRNS,  RGB_HUD, RGB_SAD, RGB_VAD,
                                  KC_TRNS,       KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS
     ),
 };
