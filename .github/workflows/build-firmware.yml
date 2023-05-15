@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        keyboard: [ "mabroum/wizza:alaa", "mabroum/zazu:alaa", "mabroum/zazu:default", "mabroum/batreeqvcirque:default", "mabroum/batreeq:alaa", "mabroum/batreeqv2:alaa" ]
+        keyboard: [ "mabroum/barghoot:alaa", "mabroum/wizza:alaa", "mabroum/zazu:alaa", "mabroum/zazu:default", "mabroum/batreeqvcirque:default", "mabroum/batreeq:alaa", "mabroum/batreeqv2:alaa" ]
     steps:
       - name: Checkout QMK
         uses: actions/checkout@v3
