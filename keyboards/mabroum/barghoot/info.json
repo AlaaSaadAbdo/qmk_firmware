@@ -15,7 +15,8 @@
         "rgb_matrix": false,
         "wpm": true,
         "haptic": true,
-        "backlight": true
+        "backlight": true,
+        "rgblight": true,
     },
     "processor": "RP2040",
     "url": "",

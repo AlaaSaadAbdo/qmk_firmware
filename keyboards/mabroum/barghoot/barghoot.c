@@ -26,7 +26,19 @@ void keyboard_post_init_user(void) {
     display_init();
   }
   rgblight_enable();
+  backlight_enable();
+}
 
+void suspend_power_down_user(void) {
+  #ifdef BACKLIGHT_ENABLE
+    backlight_level_noeeprom(0);
+  #endif // ifdef BACKLIGHT_ENABLE
+}
+
+void suspend_wakeup_init_user(void) {
+  #ifdef BACKLIGHT_ENABLE
+    backlight_level_noeeprom(1);
+  #endif // ifdef BACKLIGHT_ENABLE
 }
 
 void housekeeping_task_user(void) {
