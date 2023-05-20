@@ -1,6 +1,5 @@
 #include "repeat.h"
 #include "nshot_mod.h"
-#include "swapper.h"
 #include "super_tab.h"
 #include "haptic.h"
 #include "pointing.h"

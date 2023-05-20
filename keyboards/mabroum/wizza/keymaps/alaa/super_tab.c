@@ -20,7 +20,7 @@ void press_super_tab(bool shift, uint16_t mod) {
 
 void unregister_super_tab(uint16_t mod) {
     if (is_super_tab_active) {
-        if (timer_elapsed(super_tab_timer) > 500) {
+        if (timer_elapsed(super_tab_timer) > 800) {
             unregister_code(mod);
             is_super_tab_active = false;
 

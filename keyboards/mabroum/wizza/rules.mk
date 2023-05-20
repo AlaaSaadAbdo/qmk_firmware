@@ -27,7 +27,6 @@ ENCODER_MAP_ENABLE               = yes
 
 SRC += nshot_mod.c \
        repeat.c \
-       swapper.c \
        super_tab.c
 VPATH += keyboards/gboards
 
