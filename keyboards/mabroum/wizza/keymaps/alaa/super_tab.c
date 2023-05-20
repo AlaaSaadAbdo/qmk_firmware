@@ -20,7 +20,20 @@ void press_super_tab(bool shift, uint16_t mod) {
 
 void unregister_super_tab(uint16_t mod) {
     if (is_super_tab_active) {
-        if (timer_elapsed(super_tab_timer) > 800) {
+        if (timer_elapsed(super_tab_timer) > 800 ) {
+            unregister_code(mod);
+            is_super_tab_active = false;
+
+            if (get_mods() & MOD_MASK_SHIFT) {
+                unregister_code(KC_LSFT);
+            }
+        }
+    }
+}
+
+void update_super_tab(uint16_t mod, uint16_t keycode) {
+    if (is_super_tab_active) {
+        if (is_super_tab_cancel_key(keycode)) {
             unregister_code(mod);
             is_super_tab_active = false;
 

@@ -123,6 +123,16 @@ bool is_nshot_cancel_key(uint16_t keycode) {
     }
 }
 
+bool is_super_tab_cancel_key(uint16_t keycode) {
+    switch (keycode) {
+    case MO_SYM:
+    case MO_NAV:
+        return true;
+    default:
+        return false;
+    }
+}
+
 bool caps_word_press_user(uint16_t keycode) {
     switch (keycode) {
         // Keycodes that continue Caps Word, with shift applied.
@@ -162,37 +172,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // only a single modifier from the previous key is repeated (e.g. Ctrl+Shift+T then Repeat produces Shift+T)
     mod_state = get_mods();
     oneshot_mod_state = get_oneshot_mods();
-
-    /* if (keymap_config.swap_lctl_lgui) { */
-            /* update_swapper( */
-            /*     &sw_win_active, false, KC_LGUI, KC_TAB, SW_WIN, */
-            /*     keycode, record */
-            /* ); */
-    /* } else { */
-            /* update_swapper( */
-            /*     &sw_win_active, false, KC_LALT, KC_TAB, SW_WIN, */
-            /*     keycode, record */
-            /* ); */
-    /* } */
+    if (keymap_config.swap_lctl_lgui) {
+        update_super_tab(KC_LGUI, keycode);
+    } else {
+        update_super_tab(KC_LALT, keycode);
+    }
     switch (keycode) {
-        /* case MO_NAV: */
-        /*     if (record->event.pressed) { */
-        /*         set_pointing_mode_device(0); */
-        /*         set_pointing_mode_id(1); */
-        /*     } else { */
-        /*         set_pointing_mode_device(0); */
-        /*         set_pointing_mode_id(0); */
-        /*     } */
-        /*     break; */
-        /* case MO_SYM: */
-        /*     if (record->event.pressed) { */
-        /*         set_pointing_mode_device(1); */
-        /*         set_pointing_mode_id(3); */
-        /*     } else { */
-        /*         set_pointing_mode_device(1); */
-        /*         set_pointing_mode_id(2); */
-        /*     } */
-        /*     break; */
         case SW_WIN:
             if (record->event.pressed) {
                 if (keymap_config.swap_lctl_lgui) {
