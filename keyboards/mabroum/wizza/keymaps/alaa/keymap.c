@@ -1,6 +1,7 @@
 #include "repeat.h"
 #include "nshot_mod.h"
 #include "swapper.h"
+#include "super_tab.h"
 #include "haptic.h"
 #include "pointing.h"
 #include "keyboards/mabroum/keys.h"
@@ -163,17 +164,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     mod_state = get_mods();
     oneshot_mod_state = get_oneshot_mods();
 
-    if (keymap_config.swap_lctl_lgui) {
-            update_swapper(
-                &sw_win_active, false, KC_LGUI, KC_TAB, SW_WIN,
-                keycode, record
-            );
-    } else {
-            update_swapper(
-                &sw_win_active, false, KC_LALT, KC_TAB, SW_WIN,
-                keycode, record
-            );
-    }
+    /* if (keymap_config.swap_lctl_lgui) { */
+            /* update_swapper( */
+            /*     &sw_win_active, false, KC_LGUI, KC_TAB, SW_WIN, */
+            /*     keycode, record */
+            /* ); */
+    /* } else { */
+            /* update_swapper( */
+            /*     &sw_win_active, false, KC_LALT, KC_TAB, SW_WIN, */
+            /*     keycode, record */
+            /* ); */
+    /* } */
     switch (keycode) {
         /* case MO_NAV: */
         /*     if (record->event.pressed) { */
@@ -193,6 +194,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         /*         set_pointing_mode_id(2); */
         /*     } */
         /*     break; */
+        case SW_WIN:
+            if (record->event.pressed) {
+                if (keymap_config.swap_lctl_lgui) {
+                        press_super_tab(false, KC_LGUI);
+                } else {
+                        press_super_tab(false, KC_LALT);
+                }
+            }
+            return false;
+        case SW_WIN_REVERSE:
+            if (record->event.pressed) {
+                if (keymap_config.swap_lctl_lgui) {
+                        press_super_tab(true, KC_LGUI);
+                } else {
+                        press_super_tab(true, KC_LALT);
+                }
+            }
+            return false;
         case DWRD:
             if (record->event.pressed) {
                 if (keymap_config.swap_lctl_lgui) {

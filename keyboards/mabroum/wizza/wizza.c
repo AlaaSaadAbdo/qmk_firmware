@@ -1,6 +1,7 @@
 #include "quantum.h"
 #include "wizza.h"
 #include "display.h"
+#include "super_tab.h"
 
 #ifdef RGBLIGHT_ENABLE
 #include "rgblight.h"
@@ -101,6 +102,12 @@ void suspend_wakeup_init_user(void) {
 
 void housekeeping_task_user(void) {
     lvgl_event_triggers();
+
+    if (keymap_config.swap_lctl_lgui) {
+    unregister_super_tab(KC_LGUI);
+    } else {
+      unregister_super_tab(KC_LALT);
+    }
 }
 
 void board_init(void) {}
