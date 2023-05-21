@@ -172,11 +172,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // only a single modifier from the previous key is repeated (e.g. Ctrl+Shift+T then Repeat produces Shift+T)
     mod_state = get_mods();
     oneshot_mod_state = get_oneshot_mods();
+
     if (keymap_config.swap_lctl_lgui) {
         update_super_tab(KC_LGUI, keycode);
     } else {
         update_super_tab(KC_LALT, keycode);
     }
+
     switch (keycode) {
         case SW_WIN:
             if (record->event.pressed) {

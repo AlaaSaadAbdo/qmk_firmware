@@ -1,9 +1,9 @@
 #include "quantum.h"
 #include "barghoot.h"
 #include "display.h"
-
 #include "qp.h"
 #include "qp_lvgl.h"
+#include "super_tab.h"
 
 kb_runtime_config kb_state;
 
@@ -43,6 +43,13 @@ void suspend_wakeup_init_user(void) {
 
 void housekeeping_task_user(void) {
   lvgl_event_triggers();
+
+  if (keymap_config.swap_lctl_lgui) {
+  unregister_super_tab(KC_LGUI);
+  } else {
+    unregister_super_tab(KC_LALT);
+  }
+
 }
 
 void board_init(void) {}

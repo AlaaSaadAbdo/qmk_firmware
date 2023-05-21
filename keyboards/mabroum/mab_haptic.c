@@ -27,8 +27,6 @@ bool mab_process_record_haptic(uint16_t keycode, keyrecord_t *record) {
         case ACCELERATION_TOGGLE:
         case DRAGSCROLL_MODE_TOGGLE:
         case SNIPING_MODE_TOGGLE:
-        case KC_AUDIO_VOL_UP:
-        case KC_AUDIO_VOL_DOWN:
         case KC_BTN1:
         case KC_BTN3:
         case C(KC_V):
@@ -72,6 +70,12 @@ bool mab_process_record_haptic(uint16_t keycode, keyrecord_t *record) {
                     DRV_pulse(medium_click1);
                 }
             }
+            break;
+        case KC_AUDIO_VOL_UP:
+        case KC_AUDIO_VOL_DOWN:
+        case SW_WIN:
+        case SW_WIN_REVERSE:
+                DRV_pulse(sharp_tick1);
             break;
         default:
             break;

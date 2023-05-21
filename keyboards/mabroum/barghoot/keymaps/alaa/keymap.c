@@ -1,6 +1,6 @@
 #include "repeat.h"
 #include "nshot_mod.h"
-#include "swapper.h"
+#include "super_tab.h"
 #include "keyboards/mabroum/mab_haptic.h"
 #include "keyboards/mabroum/mab_pointing.h"
 #include "keyboards/mabroum/keys.h"
@@ -114,6 +114,16 @@ bool is_nshot_cancel_key(uint16_t keycode) {
     }
 }
 
+bool is_super_tab_cancel_key(uint16_t keycode) {
+    switch (keycode) {
+    case MO_SYM:
+    case MO_NAV:
+        return true;
+    default:
+        return false;
+    }
+}
+
 bool caps_word_press_user(uint16_t keycode) {
     switch (keycode) {
         // Keycodes that continue Caps Word, with shift applied.
@@ -155,17 +165,30 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     oneshot_mod_state = get_oneshot_mods();
 
     if (keymap_config.swap_lctl_lgui) {
-            update_swapper(
-                &sw_win_active, KC_LGUI, KC_TAB, SW_WIN,
-                keycode, record
-            );
+        update_super_tab(KC_LGUI, keycode);
     } else {
-            update_swapper(
-                &sw_win_active, KC_LALT, KC_TAB, SW_WIN,
-                keycode, record
-            );
+        update_super_tab(KC_LALT, keycode);
     }
+
     switch (keycode) {
+        case SW_WIN:
+            if (record->event.pressed) {
+                if (keymap_config.swap_lctl_lgui) {
+                        press_super_tab(false, KC_LGUI);
+                } else {
+                        press_super_tab(false, KC_LALT);
+                }
+            }
+            return false;
+        case SW_WIN_REVERSE:
+            if (record->event.pressed) {
+                if (keymap_config.swap_lctl_lgui) {
+                        press_super_tab(true, KC_LGUI);
+                } else {
+                        press_super_tab(true, KC_LALT);
+                }
+            }
+            return false;
         case DWRD:
             if (record->event.pressed) {
                 if (keymap_config.swap_lctl_lgui) {
