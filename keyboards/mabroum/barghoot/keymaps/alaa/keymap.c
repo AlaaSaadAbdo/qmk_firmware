@@ -75,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         SCRNSHT,  KC_ENT,  KC_BSPC,  KC_TAB,  KC_DEL,            DWRD,    KC_NO,     KC_UP,    QUIT,     WRKFLW1,
         OS_LCTL,  OS_LALT, OS_LGUI,  OS_LSFT, SALL,              KC_DOT,  KC_LEFT,   KC_DOWN,  KC_RIGHT, WRKFLW2,
         KC_6,  CUT,     COPY,      PASTE,     SALL,              KC_0,    KC_ENT,    KC_BSPC,  KC_TAB,   KC_6,
-     RGB_MOD, RGB_RMOD, KC_TRNS, KC_TRNS, KC_TRNS,               KC_TRNS, KC_TRNS,   KC_TRNS,  RGB_RMOD, RGB_MOD,
+     RGB_MOD, RGB_RMOD, RGB_SPI, KC_TRNS, KC_TRNS,               KC_TRNS, KC_TRNS,   RGB_SPD,  RGB_RMOD, RGB_MOD,
                           KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
     ),
     [SYM] = LAYOUT_4x5_3(
