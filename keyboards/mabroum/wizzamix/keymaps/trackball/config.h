@@ -1,6 +1,9 @@
+#define PMW33XX_CS_PIN GP21
+#define PMW33XX_CPI 800
+#define PMW33XX_CS_DIVISOR 8 // needs to be the same as the SHIFTREG_DIVISOR above
+
 #define COMBO_ONLY_FROM_LAYER 0
 #define COMBO_TERM 20
-
 
 #ifdef RGB_MATRIX_ENABLE
 

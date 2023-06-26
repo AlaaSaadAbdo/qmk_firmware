@@ -1,5 +1,4 @@
-MAB_CIRQUE_BOTH = yes
-
-ifeq ($(strip $(MAB_CIRQUE_BOTH)), yes)
-   OPT_DEFS += -DMCU_HELIOS
-endif
+CIRQUE_ENABLE = yes
+POINTING_DEVICE_ENABLE := yes
+POINTING_DEVICE_DRIVER := cirque_pinnacle_spi
+OPT_DEFS += -DMAB_CIRQUE_BOTH
