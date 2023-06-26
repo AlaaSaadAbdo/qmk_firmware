@@ -44,24 +44,24 @@ static void write_mab_config_to_eeprom(mab_config_t* config) {
 static void maybe_update_pointing_device_cpi(mab_config_t* config) {
     if (is_keyboard_left()) {
         if (get_pointing_mode_id() == PM_DRAG) {
-            pointing_device_set_cpi_on_side(true, 150);
+            pointing_device_set_cpi_on_side(true, 100);
             pointing_device_set_cpi_on_side(false, MAB_DRAGSCROLL_DPI);
         } else if (get_pointing_mode_id() == PM_PRECISION) {
-            pointing_device_set_cpi_on_side(true, 150);
+            pointing_device_set_cpi_on_side(true, 100);
             pointing_device_set_cpi_on_side(false,get_pointer_sniping_dpi(config));
         } else {
-            pointing_device_set_cpi_on_side(true, 150);
+            pointing_device_set_cpi_on_side(true, 100);
             pointing_device_set_cpi_on_side(false, get_pointer_default_dpi(config));
         }
     } else {
         if (get_pointing_mode_id() == PM_DRAG) {
-            pointing_device_set_cpi_on_side(true, 150);
+            pointing_device_set_cpi_on_side(true, 100);
             pointing_device_set_cpi(MAB_DRAGSCROLL_DPI);
         } else if (get_pointing_mode_id() == PM_PRECISION) {
-            pointing_device_set_cpi_on_side(true, 150);
+            pointing_device_set_cpi_on_side(true, 100);
             pointing_device_set_cpi(get_pointer_sniping_dpi(config));
         } else {
-            pointing_device_set_cpi_on_side(true, 150);
+            pointing_device_set_cpi_on_side(true, 100);
             pointing_device_set_cpi(get_pointer_default_dpi(config));
         }
     }
