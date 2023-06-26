@@ -1,5 +1,5 @@
 #include "quantum.h"
-#include "wizza.h"
+#include "wizzamix.h"
 #include "display.h"
 #include "super_tab.h"
 

@@ -1,6 +1,6 @@
 {
     "manufacturer": "Alaa Mansour",
-    "keyboard_name": "wizza",
+    "keyboard_name": "wizzamix",
     "maintainer": "AlaaSaadAbdo",
     "bootloader": "rp2040",
     "processor": "RP2040",
@@ -83,7 +83,7 @@
                 { "matrix": [6, 2], "x": 2, "y": 0 },
                 { "matrix": [6, 1], "x": 1, "y": 0 },
                 { "matrix": [6, 0], "x": 0, "y": 0 },
- 
+
 
                 { "matrix": [2, 1], "x": 1, "y": 2 },
                 { "matrix": [2, 2], "x": 2, "y": 2 },
@@ -92,7 +92,7 @@
                 { "matrix": [7, 3], "x": 3, "y": 0 },
                 { "matrix": [7, 2], "x": 2, "y": 0 },
                 { "matrix": [7, 1], "x": 1, "y": 0 },
- 
+
 
                 { "matrix": [2, 0], "x": 0, "y": 2 },
                 { "matrix": [2, 4], "x": 4, "y": 2 },
