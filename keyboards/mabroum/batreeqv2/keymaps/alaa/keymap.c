@@ -19,8 +19,8 @@
 
 // global
 #define SCRNSHT     C(A(S(KC_P)))
-#define WRKFLW1     A(C(S(G(KC_K))))
-#define WRKFLW2     A(C(S(G(KC_Y))))
+#define WRKFLW1     A(C(S(KC_K)))
+#define WRKFLW2     A(C(S(KC_Y)))
 #define RCRD        A(KC_F10)
 
 // layers
@@ -266,6 +266,31 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
               eeconfig_update_keymap(keymap_config.raw);
               mab_set_pointer();
               lv_event_send(ui_Layer_Indicator, USER_EVENT_ACTIVE_LAYER_CHANGE, NULL);
+            }
+            return false;
+        case CLIPBOARD:
+            if (record->event.pressed) {
+              tap_code16(CLIPBOARD);
+            }
+            return false;
+        case LAUNCHER:
+            if (record->event.pressed) {
+              tap_code16(LAUNCHER);
+            }
+            return false;
+        case SCRNSHT:
+            if (record->event.pressed) {
+              tap_code16(SCRNSHT);
+            }
+            return false;
+        case WRKFLW1:
+            if (record->event.pressed) {
+              tap_code16(WRKFLW1);
+            }
+            return false;
+        case WRKFLW2:
+            if (record->event.pressed) {
+              tap_code16(WRKFLW2);
             }
             return false;
         default:
