@@ -30,7 +30,7 @@
 #define SPI_MISO_PIN GP4
 
 #define PMW33XX_CS_PIN GP1
-#define PMW33XX_CPI 1200
+#define PMW33XX_CPI 300
 #define PMW33XX_CS_DIVISOR 8 // needs to be the same as the SHIFTREG_DIVISOR above
 // #define POINTING_DEVICE_INVERT_Y
 #define POINTING_DEVICE_INVERT_X

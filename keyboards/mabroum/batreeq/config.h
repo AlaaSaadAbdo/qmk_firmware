@@ -31,7 +31,7 @@
 #define ENCODER_RESOLUTION 1
 
 #define PMW33XX_CS_PIN D2
-#define PMW33XX_CPI 1200
+#define PMW33XX_CPI 500
 #define PMW33XX_CS_DIVISOR 128 // needs to be the same as the SHIFTREG_DIVISOR above
 // #define POINTING_DEVICE_INVERT_Y
 #define POINTING_DEVICE_INVERT_X
