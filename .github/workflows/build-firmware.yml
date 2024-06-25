@@ -16,7 +16,7 @@ jobs:
                 keyboard: [ "mabroum/katkoot:default", "mabroum/wizzamix:cirque", "mabroum/wizzamix:trackball", "mabroum/barghoot:alaa", "mabroum/wizza:alaa", "mabroum/zazu:alaa", "mabroum/zazu:default", "mabroum/batreeqvcirque:default", "mabroum/batreeq:alaa", "mabroum/batreeqv2:alaa" ]
     steps:
       - name: Checkout QMK
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           repository: ${{ github.repository}}
           ref: ${{ github.ref }}
@@ -27,7 +27,7 @@ jobs:
         run: |
           make ${{ matrix.keyboard }}
       - name: Archive firmware
-        uses: actions/upload-artifact/merge@v4
+        uses: actions/upload-artifact@v3
         continue-on-error: true
         with:
           name: qmk_mabroum_${{ github.actor }}
