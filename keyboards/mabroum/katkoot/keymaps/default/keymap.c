@@ -27,8 +27,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * └───┴───┴───┴───┘
      */
     [0] = LAYOUT_ortho_2x3(
-        KC_BTN2,   KC_BTN1,   SNP_TOG,
-        DRG_TOG,   KC_BTN3,   KC_MUTE
+        KC_BTN2,   KC_BTN3,   KC_BTN1,
+        DRG_TOG,   DRGSCRL,   KC_MUTE
     )
 };
 
