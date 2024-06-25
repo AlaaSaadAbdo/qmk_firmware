@@ -1,0 +1,3 @@
+//  name     result    chord keys
+COMB(DPI_FORWARD,  DPI_MOD,    KC_BTN1, KC_BTN2, SNP_TOG)
+COMB(DPI_BACKWARD, DPI_RMOD,   KC_BTN3, DRG_TOG)
