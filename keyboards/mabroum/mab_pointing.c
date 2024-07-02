@@ -7,7 +7,11 @@
 #endif
 
 #define MAB_SNIPING_DPI_CONFIG_STEP 100
-#define MAB_DRAGSCROLL_DPI 100
+
+#    ifndef MAB_DRAGSCROLL_DPI 
+#        define MAB_DRAGSCROLL_DPI 100
+#    endif
+
 #    ifndef MAB_DRAGSCROLL_BUFFER_SIZE
 #        define MAB_DRAGSCROLL_BUFFER_SIZE 6
 #    endif
