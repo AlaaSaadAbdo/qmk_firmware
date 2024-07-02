@@ -34,3 +34,5 @@
 #define PMW33XX_CS_DIVISOR 8 // needs to be the same as the SHIFTREG_DIVISOR above
 // #define POINTING_DEVICE_INVERT_Y
 #define POINTING_DEVICE_INVERT_X
+
+#define MAB_DRAGSCROLL_BUFFER_SIZE 30
